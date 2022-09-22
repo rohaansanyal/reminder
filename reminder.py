@@ -649,9 +649,11 @@ def description_window():
 	descwindow = tk.Tk()
 	descwindow.title("Enter Description")
 	descwindow.geometry(str(int(screen_width/3.5)) + "x" + str(int(screen_height/3.5)))
+	placement_unit_x = (window.winfo_screenwidth()/3.5)/20
+	placement_unit_y = (window.winfo_screenheight()/3.5)/20
 
 	desctext = Text(descwindow, height = 10, width = 47)
-	desctext.place(x=26, y=30)
+	desctext.place(x=placement_unit_x*3, y=placement_unit_y*2)
 
 	def done():
 
@@ -659,7 +661,7 @@ def description_window():
 		descwindow.destroy()
 
 	donebutton = Button(descwindow, text="Done", command=done)
-	donebutton.place(x=321, y=180)
+	donebutton.place(x=placement_unit_x*17, y=placement_unit_y*17)
 
 	if selected_theme.get() == "Light":
 
