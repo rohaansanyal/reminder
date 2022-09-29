@@ -434,7 +434,7 @@ def tick():
 	print()
 	"""
 
-	print(desctext)
+
 
 	x = ""
 
@@ -633,7 +633,7 @@ def reminder_confirm():
 
 
 	if unique_title == True and correct_time==True:
-		tempvar = Assignment(title.get(), description, selected_importance.get(), selected_month.get(), selected_day.get(), selected_hour.get(), selected_minutes.get(), "") 
+		tempvar = Assignment(title.get(), descstr, selected_importance.get(), selected_month.get(), selected_day.get(), selected_hour.get(), selected_minutes.get(), "") 
 		AddEvent(tempvar)
 
 	x=""
@@ -656,7 +656,7 @@ def description_window():
 	desctext.place(x=placement_unit_x*3, y=placement_unit_y*2)
 
 	def done():
-
+		global descstr 
 		descstr = str(desctext.get("1.0", 'end-1c'))
 		descwindow.destroy()
 
@@ -674,6 +674,8 @@ def description_window():
 		descwindow.configure(bg="dark slate gray")
 		desctext.configure(bg="gray")
 		donebutton.configure(highlightbackground="dark slate gray", fg="black")
+
+
 
 #	description = tk.Text(descwindow, wrap = WORD, padx = 10, pady = 10, width = screen_width/3 - 10, height = screen_height/4 - 10)
 	#description.pack()
