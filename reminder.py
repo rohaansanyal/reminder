@@ -43,6 +43,10 @@ tasks = []
 
 tasks_shown = []
 
+veryimportanttasks = []
+importanttasks = []
+notimportanttasks = []
+
 selected_month = tk.StringVar(window)
 selected_month.set(months[0])
 
@@ -72,7 +76,7 @@ dropdown_list_day.place(x=(placement_unit_x*7.5), y=(placement_unit_y*3))
 daylabel = tk.Label(window, text="Day", fg="white", bg="grey60")
 daylabel.place(x=(placement_unit_x*7.5), y=(placement_unit_y*2.5))
 
-important = ["Not Important", "Important", "Very Important"]
+important = ["Very Important", "Important", "Not Important"]
 
 selected_importance = tk.StringVar(window)
 selected_importance.set(important[0]) 
@@ -113,7 +117,9 @@ minutes = tk.Label(window, text="Minutes", fg="white", bg="grey60")
 minutes.place(x=(placement_unit_x*7.5), y=(placement_unit_y*5))
 
 reminder_holder = tk.StringVar(window, "")
-reminder_holder_test = ""
+veryimportanttasks_holder = tk.StringVar(window, "")
+importanttasks_holder = tk.StringVar(window, "")
+notimportanttasks_holder = tk.StringVar(window, "")
 
 title = tk.StringVar(window, "Title")
 
@@ -179,6 +185,7 @@ taskslabel.place(x=0, y=0)
 
 descadded = False
 desctext = ""
+descstr = ""
 
 #leap year
 
@@ -434,7 +441,9 @@ def tick():
 	print()
 	"""
 
-
+	#print(str(veryimportanttasks_holder.get()))
+	#print(str(importanttasks_holder.get()))
+	#print(str(notimportanttasks_holder.get()))
 
 	x = ""
 
@@ -545,6 +554,42 @@ def AddEvent(event):
 	tasks.append(event)
 	tasks_shown.append(str(event.importance)+" "+str(event.title)+" - "+ str(event.month)+" "+str(event.day)+" • "+str(event.hour)+":"+str(event.minute)+"\n"+str(event.desc)+"\n"+str(event.countdown))
 
+	if event.importance == "Very Important":
+
+		veryimportanttasks.append(event)
+
+		x = ""
+
+		for i in veryimportanttasks:
+
+			x = x+i.strng+"\n"
+
+		veryimportanttasks_holder.set(x)
+
+	elif event.importance == "Important":
+
+		importanttasks.append(event)
+
+		x = ""
+
+		for i in importanttasks:
+
+			x = x+i.strng+"\n"
+
+		importanttasks_holder.set(x)
+
+	elif event.importance == "Not Important":
+
+		notimportanttasks.append(event)
+
+		x = ""
+
+		for i in notimportanttasks:
+
+			x = x+i.strng+"\n"
+
+		notimportanttasks_holder.set(x)
+
 	x=""
 
 	for i in tasks:
@@ -582,7 +627,7 @@ remove = tk.Button(window, text="Remove", command=remove_event_button, fg="white
 remove.place(x=(placement_unit_x*7.5), y=(placement_unit_y*7))
 
 tasks_made=tk.Label(window, textvariable=reminder_holder,fg="white", bg="grey60")
-tasks_made.place(x=(placement_unit_x*12), y=(placement_unit_y*1.5))
+#tasks_made.place(x=(placement_unit_x*12), y=(placement_unit_y*1.5))
 
 def reminder_confirm():
 
@@ -633,6 +678,7 @@ def reminder_confirm():
 
 
 	if unique_title == True and correct_time==True:
+
 		tempvar = Assignment(title.get(), descstr, selected_importance.get(), selected_month.get(), selected_day.get(), selected_hour.get(), selected_minutes.get(), "") 
 		AddEvent(tempvar)
 
@@ -658,7 +704,13 @@ def description_window():
 	def done():
 		global descstr 
 		descstr = str(desctext.get("1.0", 'end-1c'))
-		descwindow.destroy()
+		if len(descstr) < 100:
+
+			descwindow.destroy()
+
+		else:
+
+			messagebox.showerror(title="Passed Character Limit", message="Your description should be under 100 characters.")
 
 	donebutton = Button(descwindow, text="Done", command=done)
 	donebutton.place(x=placement_unit_x*17, y=placement_unit_y*17)
