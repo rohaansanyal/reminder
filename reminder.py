@@ -130,8 +130,8 @@ completed = tk.StringVar(window, "Event to Remove")
 
 to_remove = []
 
-entry_completed = tk.Entry(window, text=completed)
-entry_completed.place(x=(placement_unit_x*7.5), y=(placement_unit_y*8))
+#entry_completed = tk.Entry(window, text=completed)
+#entry_completed.place(x=(placement_unit_x*7.5), y=(placement_unit_y*8))
 
 #confirm = tk.Button(window, text="Enter", command=reminder_confirm, fg="white", bg="sienna1")
 
@@ -187,6 +187,9 @@ descadded = False
 desctext = ""
 descstr = ""
 
+deletedropdown = ["Events"]
+selected_delete = tk.StringVar(window)
+
 #leap year
 
 month_ends = {"January":31, "February":28, "March":31, "April":30, "May":31, "June":30, "July":31, "August":31, "September":30, "October":31, "November":30, "December":31}
@@ -227,7 +230,6 @@ def tick():
 	placement_unit_x = window.winfo_width()/20
 	placement_unit_y = window.winfo_height()/20
 
-
 	selected_month_number=0
 
 	a=0
@@ -261,7 +263,7 @@ def tick():
 
 	entry_title.place(x=placement_unit_x*0.5, y=placement_unit_y*2.5) #y based off of this, used to be 1.5
 
-	entry_completed.place(x=(placement_unit_x*4.5), y=(placement_unit_y*8.5))
+	removedropdown.place(x=(placement_unit_x*4.5), y=(placement_unit_y*8.5))
 
 	clockTime.place(x=(window_width/2), y=0)
 
@@ -320,10 +322,10 @@ def tick():
 			remove.config(fg="black")
 			confirm.config(highlightbackground="azure2")
 			confirm.config(fg="black")
-			entry_completed.config(highlightbackground = "azure2")
-			entry_completed.config(bg = "azure3")
-			entry_completed.config(bd = 1.5)
-			entry_completed.config(relief="ridge")
+			removedropdown.config(highlightbackground = "azure2")
+			removedropdown.config(bg = "azure3")
+			removedropdown.config(bd = 1.5)
+			removedropdown.config(relief="ridge")
 			not_completed_addtime.config(highlightbackground = "azure2")
 			not_completed_addtime.config(bg = "azure3")
 			not_completed_addtime.config(bd = 1.5)
@@ -407,9 +409,9 @@ def tick():
 			current_date.config(fg="black")
 			confirm.config(highlightbackground="dark slate gray")
 			confirm.config(fg="black")
-			entry_completed.config(highlightbackground = "dark slate gray")
-			entry_completed.config(bg = "gray")
-			entry_completed.config(bd = 1.5)
+			removedropdown.config(highlightbackground = "dark slate gray")
+			removedropdown.config(bg = "gray")
+			removedropdown.config(bd = 1.5)
 			remove.config(highlightbackground="dark slate gray")
 			remove.config(fg="black")
 			not_completed_addtime.config(highlightbackground = "dark slate gray")
@@ -444,6 +446,8 @@ def tick():
 	#print(str(veryimportanttasks_holder.get()))
 	#print(str(importanttasks_holder.get()))
 	#print(str(notimportanttasks_holder.get()))
+
+	print(deletedropdown)
 
 	x = ""
 
@@ -527,14 +531,22 @@ def tick():
 
 def remove_by_name(item_to_remove):
 
-	x=""
+	for i in tasks:
 
+		if item_to_remove == i.title:
+
+			tasks.remove(i)
+
+
+
+	#x=""
+
+	"""
 	for i in tasks_shown:
 
 		if item_to_remove in i:
 
 			tasks_shown.remove(i)
-
 
 	for i in tasks:
 
@@ -542,21 +554,16 @@ def remove_by_name(item_to_remove):
 
 	reminder_holder.set(x)
 
+	"""
+
 	#veryimportanttasks_holder.set(x)
 	#importanttasks_holder.set(x)
 	#notimportanttasks_holder.set(x)
 
-	for i in tasks:
-
-		event_title = i.title
-
-		if item_to_remove == event_title:
-
-			tasks.remove(i)
-
 def AddEvent(event):
 	tasks.append(event)
 	tasks_shown.append(str(event.importance)+" "+str(event.title)+" - "+ str(event.month)+" "+str(event.day)+" • "+str(event.hour)+":"+str(event.minute)+"\n"+str(event.desc)+"\n"+str(event.countdown))
+	deletedropdown.append([str(event.title), str(event.importance)])
 
 	if event.importance == "Very Important":
 
@@ -601,6 +608,10 @@ def AddEvent(event):
 def RemoveEvent(event):
 	
 	tasks.remove(event)
+	veryimportanttasks.remove(event)
+	importanttasks.remove(event)
+	notimportanttasks.remove(event)
+	deletedropdown.remove([str(event.title), str(event.importance)])
 
 	"""
 
@@ -620,10 +631,15 @@ def RemoveEvent(event):
 
 def remove_event_button():
 
-	remove_by_name(completed.get())
+	remove_by_name(deletedropdown.get())
 
 remove = tk.Button(window, text="Remove", command=remove_event_button, fg="white", bg="sienna1")
 remove.place(x=(placement_unit_x*7.5), y=(placement_unit_y*7))
+
+#dropdown_list_month = tk.OptionMenu(window, selected_month, *months)
+
+removedropdown = tk.OptionMenu(window, selected_delete, *deletedropdown)
+removedropdown.place(x=(placement_unit_x*7.5), y=(placement_unit_y*8))
 
 #tasks_made=tk.Label(window, textvariable=reminder_holder,fg="white", bg="grey60") ------------------------------------------------------- task made
 #tasks_made.place(x=(placement_unit_x*12), y=(placement_unit_y*1.5))
