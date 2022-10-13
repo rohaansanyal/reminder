@@ -79,7 +79,7 @@ daylabel.place(x=(placement_unit_x*7.5), y=(placement_unit_y*2.5))
 important = ["Very Important", "Important", "Not Important"]
 
 selected_importance = tk.StringVar(window)
-selected_importance.set(important[0])
+selected_importance.set(important[0]) 
 
 dropdown_list_importance = tk.OptionMenu(window, selected_importance, *important)
 dropdown_list_importance.place(x=(placement_unit_x*2.5), y=(placement_unit_y*7))
@@ -130,8 +130,8 @@ completed = tk.StringVar(window, "Event to Remove")
 
 to_remove = []
 
-#entry_completed = tk.Entry(window, text=completed)
-#entry_completed.place(x=(placement_unit_x*7.5), y=(placement_unit_y*8))
+entry_completed = tk.Entry(window, text=completed)
+entry_completed.place(x=(placement_unit_x*7.5), y=(placement_unit_y*8))
 
 #confirm = tk.Button(window, text="Enter", command=reminder_confirm, fg="white", bg="sienna1")
 
@@ -187,9 +187,6 @@ descadded = False
 desctext = ""
 descstr = ""
 
-deletedropdown = ["Events"]
-selected_delete = tk.StringVar(window)
-
 #leap year
 
 month_ends = {"January":31, "February":28, "March":31, "April":30, "May":31, "June":30, "July":31, "August":31, "September":30, "October":31, "November":30, "December":31}
@@ -230,6 +227,7 @@ def tick():
 	placement_unit_x = window.winfo_width()/20
 	placement_unit_y = window.winfo_height()/20
 
+
 	selected_month_number=0
 
 	a=0
@@ -263,7 +261,7 @@ def tick():
 
 	entry_title.place(x=placement_unit_x*0.5, y=placement_unit_y*2.5) #y based off of this, used to be 1.5
 
-	removedropdown.place(x=(placement_unit_x*4.5), y=(placement_unit_y*8.5))
+	entry_completed.place(x=(placement_unit_x*4.5), y=(placement_unit_y*8.5))
 
 	clockTime.place(x=(window_width/2), y=0)
 
@@ -322,10 +320,10 @@ def tick():
 			remove.config(fg="black")
 			confirm.config(highlightbackground="azure2")
 			confirm.config(fg="black")
-			removedropdown.config(highlightbackground = "azure2")
-			removedropdown.config(bg = "azure3")
-			removedropdown.config(bd = 1.5)
-			removedropdown.config(relief="ridge")
+			entry_completed.config(highlightbackground = "azure2")
+			entry_completed.config(bg = "azure3")
+			entry_completed.config(bd = 1.5)
+			entry_completed.config(relief="ridge")
 			not_completed_addtime.config(highlightbackground = "azure2")
 			not_completed_addtime.config(bg = "azure3")
 			not_completed_addtime.config(bd = 1.5)
@@ -409,9 +407,9 @@ def tick():
 			current_date.config(fg="black")
 			confirm.config(highlightbackground="dark slate gray")
 			confirm.config(fg="black")
-			removedropdown.config(highlightbackground = "dark slate gray")
-			removedropdown.config(bg = "gray")
-			removedropdown.config(bd = 1.5)
+			entry_completed.config(highlightbackground = "dark slate gray")
+			entry_completed.config(bg = "gray")
+			entry_completed.config(bd = 1.5)
 			remove.config(highlightbackground="dark slate gray")
 			remove.config(fg="black")
 			not_completed_addtime.config(highlightbackground = "dark slate gray")
@@ -447,14 +445,12 @@ def tick():
 	#print(str(importanttasks_holder.get()))
 	#print(str(notimportanttasks_holder.get()))
 
-	print(deletedropdown)
-
 	x = ""
 
 	for i in tasks:
 
-		x = x+i.strng+"\n"
-
+		x = x+i.strng+"\n" 
+	
 	reminder_holder.set(x)
 
 	#~~~~~~~~~~~~~~~~~~~~~~ countdown timer ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -464,7 +460,7 @@ def tick():
 	for event in tasks:
 		currmonthend=month_ends[TimeMonth]
 		if TimeDay != currmonthend and event.month == TimeMonth and TimeDay == event.day:
-			hoursuntilevent = int(event.hour) - int(TimeHour)
+			hoursuntilevent = int(event.hour) - int(TimeHour) 
 
 			if int(event.minute)>=int(TimeMinute):
 				minuntilevent = int(event.minute) - int(TimeMinute)
@@ -475,8 +471,8 @@ def tick():
 				hoursuntilevent=hoursuntilevent-1
 
 
-
-
+		
+		
 		#print("hours until event: " + str(hoursuntilevent))
 		#print("minutes until event: " + str(minuntilevent))
 
@@ -496,7 +492,7 @@ def tick():
 			answer = messagebox.askquestion("Timer", j.title + " is due. Is it complete?", icon='warning')
 
 			if answer == "yes":
-
+				
 				RemoveEvent(j)
 
 
@@ -511,18 +507,18 @@ def tick():
 					tempj.hour = str(int(tempj.hour))
 
 				else:
-
+					
 					tempj.minute = str(int(tempj.minute) + int(addtime.get()))
-
+				
 				AddEvent(tempj)
 
 
-
+	
 
 
 
 	if len(to_be_deleted)>0:
-
+					
 		tasks_shown = [i for j, i in enumerate(tasks_shown) if j not in to_be_deleted]
 
 	clockTime.after(100,tick)
@@ -531,15 +527,15 @@ def tick():
 
 def remove_by_name(item_to_remove):
 
-	#for i in tasks:
+	x=""
 
-
+	
 	#for i in tasks_shown:
 #
 #		if item_to_remove in i:
 
 #			tasks_shown.remove(i)
-
+	
 
 #      -----------TASKS-------------
 	for i in tasks:
@@ -553,7 +549,7 @@ def remove_by_name(item_to_remove):
 
 	for i in tasks:
 
-		x = x+i.strng+"\n"
+		x = x+i.strng+"\n" 
 
 	reminder_holder.set(x)
 
@@ -573,7 +569,7 @@ def remove_by_name(item_to_remove):
 
 	for i in veryimportanttasks:
 
-		x = x+i.strng+"\n"
+		x = x+i.strng+"\n" 
 
 	reminder_holder.set(x)
 
@@ -590,7 +586,7 @@ def remove_by_name(item_to_remove):
 
 	for i in importanttasks:
 
-		x = x+i.strng+"\n"
+		x = x+i.strng+"\n" 
 
 	reminder_holder.set(x)
 
@@ -607,7 +603,7 @@ def remove_by_name(item_to_remove):
 
 	for i in notimportanttasks:
 
-		x = x+i.strng+"\n"
+		x = x+i.strng+"\n" 
 
 	reminder_holder.set(x)
 
@@ -615,7 +611,6 @@ def remove_by_name(item_to_remove):
 def AddEvent(event):
 	tasks.append(event)
 	x = ""
-	deletedropdown.append([str(event.title), str(event.importance)])
 
 	for i in veryimportanttasks:
 
@@ -666,12 +661,8 @@ def AddEvent(event):
 
 
 def RemoveEvent(event):
-
+	
 	tasks.remove(event)
-	veryimportanttasks.remove(event)
-	importanttasks.remove(event)
-	notimportanttasks.remove(event)
-	deletedropdown.remove([str(event.title), str(event.importance)])
 
 	"""
 
@@ -686,7 +677,7 @@ def RemoveEvent(event):
 		x = x+i.strng+"\n"
 
 	reminder_holder.set(x)
-
+	
 	"""
 
 def remove_event_button():
@@ -695,11 +686,6 @@ def remove_event_button():
 
 remove = tk.Button(window, text="Remove", command=remove_event_button, fg="white", bg="sienna1")
 remove.place(x=(placement_unit_x*7.5), y=(placement_unit_y*7))
-
-#dropdown_list_month = tk.OptionMenu(window, selected_month, *months)
-
-removedropdown = tk.OptionMenu(window, selected_delete, *deletedropdown)
-removedropdown.place(x=(placement_unit_x*7.5), y=(placement_unit_y*8))
 
 #tasks_made=tk.Label(window, textvariable=reminder_holder,fg="white", bg="grey60") ------------------------------------------------------- task made
 #tasks_made.place(x=(placement_unit_x*12), y=(placement_unit_y*1.5))
@@ -720,7 +706,7 @@ def reminder_confirm():
 
 	correct_time = False
 
-
+	
 
 	for event in tasks:
 
@@ -739,12 +725,12 @@ def reminder_confirm():
 			#print("2")
 			if int(selected_day.get())>=int(time.strftime("%e")):
 				#print("3")
-
+				
 				if int(selected_day.get())==int(time.strftime("%e")):
 					#print("4")
-					if int(selected_hour.get())>=int(time.strftime("%H")):
+					if int(selected_hour.get())>=int(time.strftime("%H")):  
 						#print("5")
-
+						
 						if int(selected_hour.get())==int(time.strftime("%H")):
 							#print("6")
 							if int(selected_minutes.get())>int(time.strftime("%M")):
@@ -757,14 +743,14 @@ def reminder_confirm():
 					correct_time=True
 		else:
 			correct_time=True
-
+								              
 	if correct_time==False:
 		messagebox.showerror(title="Invalid Alarm", message="Your alarm needs to be set at a date that has not passed yet.")
 
 
 	if unique_title == True and correct_time==True:
 
-		tempvar = Assignment(title.get(), descstr, selected_importance.get(), selected_month.get(), selected_day.get(), selected_hour.get(), selected_minutes.get(), "")
+		tempvar = Assignment(title.get(), descstr, selected_importance.get(), selected_month.get(), selected_day.get(), selected_hour.get(), selected_minutes.get(), "") 
 		AddEvent(tempvar)
 
 	x=""
@@ -787,7 +773,7 @@ def description_window():
 	desctext.place(x=placement_unit_x*3, y=placement_unit_y*2)
 
 	def done():
-		global descstr
+		global descstr 
 		descstr = str(desctext.get("1.0", 'end-1c'))
 		if len(descstr) < 100:
 
