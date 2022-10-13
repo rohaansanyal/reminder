@@ -531,7 +531,7 @@ def tick():
 
 def remove_by_name(item_to_remove):
 
-	for i in tasks:
+	#for i in tasks:
 
 
 	#for i in tasks_shown:
@@ -615,6 +615,7 @@ def remove_by_name(item_to_remove):
 def AddEvent(event):
 	tasks.append(event)
 	x = ""
+	deletedropdown.append([str(event.title), str(event.importance)])
 
 	for i in veryimportanttasks:
 
