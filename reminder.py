@@ -79,7 +79,7 @@ daylabel.place(x=(placement_unit_x*7.5), y=(placement_unit_y*2.5))
 important = ["Very Important", "Important", "Not Important"]
 
 selected_importance = tk.StringVar(window)
-selected_importance.set(important[0]) 
+selected_importance.set(important[0])
 
 dropdown_list_importance = tk.OptionMenu(window, selected_importance, *important)
 dropdown_list_importance.place(x=(placement_unit_x*2.5), y=(placement_unit_y*7))
@@ -453,8 +453,8 @@ def tick():
 
 	for i in tasks:
 
-		x = x+i.strng+"\n" 
-	
+		x = x+i.strng+"\n"
+
 	reminder_holder.set(x)
 
 	#~~~~~~~~~~~~~~~~~~~~~~ countdown timer ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -464,7 +464,7 @@ def tick():
 	for event in tasks:
 		currmonthend=month_ends[TimeMonth]
 		if TimeDay != currmonthend and event.month == TimeMonth and TimeDay == event.day:
-			hoursuntilevent = int(event.hour) - int(TimeHour) 
+			hoursuntilevent = int(event.hour) - int(TimeHour)
 
 			if int(event.minute)>=int(TimeMinute):
 				minuntilevent = int(event.minute) - int(TimeMinute)
@@ -475,8 +475,8 @@ def tick():
 				hoursuntilevent=hoursuntilevent-1
 
 
-		
-		
+
+
 		#print("hours until event: " + str(hoursuntilevent))
 		#print("minutes until event: " + str(minuntilevent))
 
@@ -496,7 +496,7 @@ def tick():
 			answer = messagebox.askquestion("Timer", j.title + " is due. Is it complete?", icon='warning')
 
 			if answer == "yes":
-				
+
 				RemoveEvent(j)
 
 
@@ -511,18 +511,18 @@ def tick():
 					tempj.hour = str(int(tempj.hour))
 
 				else:
-					
+
 					tempj.minute = str(int(tempj.minute) + int(addtime.get()))
-				
+
 				AddEvent(tempj)
 
 
-	
+
 
 
 
 	if len(to_be_deleted)>0:
-					
+
 		tasks_shown = [i for j, i in enumerate(tasks_shown) if j not in to_be_deleted]
 
 	clockTime.after(100,tick)
@@ -533,37 +533,96 @@ def remove_by_name(item_to_remove):
 
 	for i in tasks:
 
-		if item_to_remove == i.title:
+
+	#for i in tasks_shown:
+#
+#		if item_to_remove in i:
+
+#			tasks_shown.remove(i)
+
+
+#      -----------TASKS-------------
+	for i in tasks:
+
+		event_title = i.title
+
+		if item_to_remove == event_title:
 
 			tasks.remove(i)
-
-
-
-	#x=""
-
-	"""
-	for i in tasks_shown:
-
-		if item_to_remove in i:
-
-			tasks_shown.remove(i)
+			print("task delete")
 
 	for i in tasks:
 
-		x = x+i.strng+"\n" 
+		x = x+i.strng+"\n"
 
 	reminder_holder.set(x)
 
-	"""
 
-	#veryimportanttasks_holder.set(x)
-	#importanttasks_holder.set(x)
-	#notimportanttasks_holder.set(x)
+
+#   ------------VeryImporant--------------
+	for i in veryimportanttasks:
+
+		event_title = i.title
+
+		if item_to_remove == event_title:
+
+			print(len(veryimportanttasks))
+			veryimportanttasks.remove(i)
+			print("verimportnat delete")
+			print(len(veryimportanttasks))
+
+	for i in veryimportanttasks:
+
+		x = x+i.strng+"\n"
+
+	reminder_holder.set(x)
+
+#--------------Imporant---------------
+
+	for i in importanttasks:
+
+		event_title = i.title
+
+		if item_to_remove == event_title:
+
+			importanttasks.remove(i)
+			print("imporatn delete")
+
+	for i in importanttasks:
+
+		x = x+i.strng+"\n"
+
+	reminder_holder.set(x)
+
+#-----------------NotImporant------------
+
+	for i in notimportanttasks:
+
+		event_title = i.title
+
+		if item_to_remove == event_title:
+
+			notimportanttasks.remove(i)
+			print("notimporant delete")
+
+	for i in notimportanttasks:
+
+		x = x+i.strng+"\n"
+
+	reminder_holder.set(x)
+
 
 def AddEvent(event):
 	tasks.append(event)
-	tasks_shown.append(str(event.importance)+" "+str(event.title)+" - "+ str(event.month)+" "+str(event.day)+" • "+str(event.hour)+":"+str(event.minute)+"\n"+str(event.desc)+"\n"+str(event.countdown))
-	deletedropdown.append([str(event.title), str(event.importance)])
+	x = ""
+
+	for i in veryimportanttasks:
+
+		x = x+i.strng+"\n"
+
+	reminder_holder.set(x)
+
+	#tasks_shown.append(str(event.importance)+" "+str(event.title)+" - "+ str(event.month)+" "+str(event.day)+" • "+str(event.hour)+":"+str(event.minute)+"\n"+str(event.desc)+"\n"+str(event.countdown))
 
 	if event.importance == "Very Important":
 
@@ -606,7 +665,7 @@ def AddEvent(event):
 
 
 def RemoveEvent(event):
-	
+
 	tasks.remove(event)
 	veryimportanttasks.remove(event)
 	importanttasks.remove(event)
@@ -626,12 +685,12 @@ def RemoveEvent(event):
 		x = x+i.strng+"\n"
 
 	reminder_holder.set(x)
-	
+
 	"""
 
 def remove_event_button():
 
-	remove_by_name(deletedropdown.get())
+	remove_by_name(str(completed.get()))
 
 remove = tk.Button(window, text="Remove", command=remove_event_button, fg="white", bg="sienna1")
 remove.place(x=(placement_unit_x*7.5), y=(placement_unit_y*7))
@@ -660,7 +719,7 @@ def reminder_confirm():
 
 	correct_time = False
 
-	
+
 
 	for event in tasks:
 
@@ -679,12 +738,12 @@ def reminder_confirm():
 			#print("2")
 			if int(selected_day.get())>=int(time.strftime("%e")):
 				#print("3")
-				
+
 				if int(selected_day.get())==int(time.strftime("%e")):
 					#print("4")
-					if int(selected_hour.get())>=int(time.strftime("%H")):  
+					if int(selected_hour.get())>=int(time.strftime("%H")):
 						#print("5")
-						
+
 						if int(selected_hour.get())==int(time.strftime("%H")):
 							#print("6")
 							if int(selected_minutes.get())>int(time.strftime("%M")):
@@ -697,14 +756,14 @@ def reminder_confirm():
 					correct_time=True
 		else:
 			correct_time=True
-								              
+
 	if correct_time==False:
 		messagebox.showerror(title="Invalid Alarm", message="Your alarm needs to be set at a date that has not passed yet.")
 
 
 	if unique_title == True and correct_time==True:
 
-		tempvar = Assignment(title.get(), descstr, selected_importance.get(), selected_month.get(), selected_day.get(), selected_hour.get(), selected_minutes.get(), "") 
+		tempvar = Assignment(title.get(), descstr, selected_importance.get(), selected_month.get(), selected_day.get(), selected_hour.get(), selected_minutes.get(), "")
 		AddEvent(tempvar)
 
 	x=""
@@ -727,7 +786,7 @@ def description_window():
 	desctext.place(x=placement_unit_x*3, y=placement_unit_y*2)
 
 	def done():
-		global descstr 
+		global descstr
 		descstr = str(desctext.get("1.0", 'end-1c'))
 		if len(descstr) < 100:
 
