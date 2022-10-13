@@ -445,6 +445,8 @@ def tick():
 	#print(str(importanttasks_holder.get()))
 	#print(str(notimportanttasks_holder.get()))
 
+	#print(veryimportanttasks)
+
 	x = ""
 
 	for i in tasks:
@@ -545,7 +547,9 @@ def remove_by_name(item_to_remove):
 		if item_to_remove == event_title:
 
 			tasks.remove(i)
-			print("task delete")
+			#print("task delete")
+
+	x=""
 
 	for i in tasks:
 
@@ -562,16 +566,17 @@ def remove_by_name(item_to_remove):
 
 		if item_to_remove == event_title:
 
-			print(len(veryimportanttasks))
 			veryimportanttasks.remove(i)
-			print("verimportnat delete")
-			print(len(veryimportanttasks))
+			#print("verimportnat delete")
+
+	x=""
 
 	for i in veryimportanttasks:
 
 		x = x+i.strng+"\n" 
 
-	reminder_holder.set(x)
+	
+	veryimportanttasks_holder.set(x)
 
 #--------------Imporant---------------
 
@@ -582,13 +587,15 @@ def remove_by_name(item_to_remove):
 		if item_to_remove == event_title:
 
 			importanttasks.remove(i)
-			print("imporatn delete")
+			#print("imporatn delete")
+
+	x=""
 
 	for i in importanttasks:
 
 		x = x+i.strng+"\n" 
 
-	reminder_holder.set(x)
+	importanttasks_holder.set(x)
 
 #-----------------NotImporant------------
 
@@ -601,11 +608,13 @@ def remove_by_name(item_to_remove):
 			notimportanttasks.remove(i)
 			print("notimporant delete")
 
+	x=""
+
 	for i in notimportanttasks:
 
 		x = x+i.strng+"\n" 
 
-	reminder_holder.set(x)
+	notimportanttasks_holder.set(x)
 
 
 def AddEvent(event):
@@ -690,14 +699,14 @@ remove.place(x=(placement_unit_x*7.5), y=(placement_unit_y*7))
 #tasks_made=tk.Label(window, textvariable=reminder_holder,fg="white", bg="grey60") ------------------------------------------------------- task made
 #tasks_made.place(x=(placement_unit_x*12), y=(placement_unit_y*1.5))
 
-tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60")
-tasks_made_veryimortant.place(x=(placement_unit_x*10), y=(placement_unit_y*2.5))
+tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60", wraplength=200)
+tasks_made_veryimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
 
-tasks_made_imortant=tk.Label(window, textvariable=importanttasks_holder,fg="white", bg="grey60")
-tasks_made_imortant.place(x=(placement_unit_x*10), y=(placement_unit_y*7.5))
+tasks_made_imortant=tk.Label(window, textvariable=importanttasks_holder,fg="white", bg="grey60", wraplength=200)
+tasks_made_imortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7.5))
 
-tasks_made_notimortant=tk.Label(window, textvariable=notimportanttasks_holder,fg="white", bg="grey60")
-tasks_made_notimortant.place(x=(placement_unit_x*10), y=(placement_unit_y*12.5))
+tasks_made_notimortant=tk.Label(window, textvariable=notimportanttasks_holder,fg="white", bg="grey60", wraplength=200)
+tasks_made_notimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12.5))
 
 
 def reminder_confirm():
