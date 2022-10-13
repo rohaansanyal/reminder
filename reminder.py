@@ -529,23 +529,15 @@ def remove_by_name(item_to_remove):
 
 	x=""
 
-	for i in tasks_shown:
+	
+	#for i in tasks_shown:
+#
+#		if item_to_remove in i:
 
-		if item_to_remove in i:
+#			tasks_shown.remove(i)
+	
 
-			tasks_shown.remove(i)
-
-
-	for i in tasks:
-
-		x = x+i.strng+"\n" 
-
-	reminder_holder.set(x)
-
-	#veryimportanttasks_holder.set(x)
-	#importanttasks_holder.set(x)
-	#notimportanttasks_holder.set(x)
-
+#      -----------TASKS-------------
 	for i in tasks:
 
 		event_title = i.title
@@ -553,10 +545,80 @@ def remove_by_name(item_to_remove):
 		if item_to_remove == event_title:
 
 			tasks.remove(i)
+			print("task delete")
+
+	for i in tasks:
+
+		x = x+i.strng+"\n" 
+
+	reminder_holder.set(x)
+
+
+
+#   ------------VeryImporant--------------
+	for i in veryimportanttasks:
+
+		event_title = i.title
+
+		if item_to_remove == event_title:
+
+			print(len(veryimportanttasks))
+			veryimportanttasks.remove(i)
+			print("verimportnat delete")
+			print(len(veryimportanttasks))
+
+	for i in veryimportanttasks:
+
+		x = x+i.strng+"\n" 
+
+	reminder_holder.set(x)
+
+#--------------Imporant---------------
+
+	for i in importanttasks:
+
+		event_title = i.title
+
+		if item_to_remove == event_title:
+
+			importanttasks.remove(i)
+			print("imporatn delete")
+
+	for i in importanttasks:
+
+		x = x+i.strng+"\n" 
+
+	reminder_holder.set(x)
+
+#-----------------NotImporant------------
+
+	for i in notimportanttasks:
+
+		event_title = i.title
+
+		if item_to_remove == event_title:
+
+			notimportanttasks.remove(i)
+			print("notimporant delete")
+
+	for i in notimportanttasks:
+
+		x = x+i.strng+"\n" 
+
+	reminder_holder.set(x)
+
 
 def AddEvent(event):
 	tasks.append(event)
-	tasks_shown.append(str(event.importance)+" "+str(event.title)+" - "+ str(event.month)+" "+str(event.day)+" • "+str(event.hour)+":"+str(event.minute)+"\n"+str(event.desc)+"\n"+str(event.countdown))
+	x = ""
+
+	for i in veryimportanttasks:
+
+		x = x+i.strng+"\n"
+
+	reminder_holder.set(x)
+
+	#tasks_shown.append(str(event.importance)+" "+str(event.title)+" - "+ str(event.month)+" "+str(event.day)+" • "+str(event.hour)+":"+str(event.minute)+"\n"+str(event.desc)+"\n"+str(event.countdown))
 
 	if event.importance == "Very Important":
 
@@ -620,7 +682,7 @@ def RemoveEvent(event):
 
 def remove_event_button():
 
-	remove_by_name(completed.get())
+	remove_by_name(str(completed.get()))
 
 remove = tk.Button(window, text="Remove", command=remove_event_button, fg="white", bg="sienna1")
 remove.place(x=(placement_unit_x*7.5), y=(placement_unit_y*7))
