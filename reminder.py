@@ -709,6 +709,7 @@ tasks_made_notimortant=tk.Label(window, textvariable=notimportanttasks_holder,fg
 tasks_made_notimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12.5))
 
 
+
 def reminder_confirm():
 
 	unique_title = True
