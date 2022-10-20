@@ -485,10 +485,117 @@ def tick():
 			tempcount.countdown=tempvar
 			event.strng = (str(event.importance)+" "+str(event.title)+" - "+ str(event.month)+" "+str(event.day)+" • "+str(event.hour)+":"+str(event.minute)+"\n"+str(event.desc)+"\n"+str(tempvar))
 
+	for event in veryimportanttasks:
+		currmonthend=month_ends[TimeMonth]
+		if TimeDay != currmonthend and event.month == TimeMonth and TimeDay == event.day:
+			hoursuntilevent = int(event.hour) - int(TimeHour) 
+
+			if int(event.minute)>=int(TimeMinute):
+				minuntilevent = int(event.minute) - int(TimeMinute)
+			else:
+				minuntilevent = (60 - int(TimeMinute))+int(event.minute)
+				#print(minuntilevent)
+				#print(TimeHour)
+				hoursuntilevent=hoursuntilevent-1
+
+
+		
+		
+		#print("hours until event: " + str(hoursuntilevent))
+		#print("minutes until event: " + str(minuntilevent))
+
+		if TimeDay == event.day and TimeMonth == event.month:
+
+			tempcount=event
+			tempvar = (str(hoursuntilevent).zfill(2) + ":" + str(minuntilevent).zfill(2))
+			tempcount.countdown=tempvar
+			event.strng = (str(event.importance)+" "+str(event.title)+" - "+ str(event.month)+" "+str(event.day)+" • "+str(event.hour)+":"+str(event.minute)+"\n"+str(event.desc)+"\n"+str(tempvar))
+
+	for event in importanttasks:
+		currmonthend=month_ends[TimeMonth]
+		if TimeDay != currmonthend and event.month == TimeMonth and TimeDay == event.day:
+			hoursuntilevent = int(event.hour) - int(TimeHour) 
+
+			if int(event.minute)>=int(TimeMinute):
+				minuntilevent = int(event.minute) - int(TimeMinute)
+			else:
+				minuntilevent = (60 - int(TimeMinute))+int(event.minute)
+				#print(minuntilevent)
+				#print(TimeHour)
+				hoursuntilevent=hoursuntilevent-1
+
+
+		
+		
+		#print("hours until event: " + str(hoursuntilevent))
+		#print("minutes until event: " + str(minuntilevent))
+
+		if TimeDay == event.day and TimeMonth == event.month:
+
+			tempcount=event
+			tempvar = (str(hoursuntilevent).zfill(2) + ":" + str(minuntilevent).zfill(2))
+			tempcount.countdown=tempvar
+			event.strng = (str(event.importance)+" "+str(event.title)+" - "+ str(event.month)+" "+str(event.day)+" • "+str(event.hour)+":"+str(event.minute)+"\n"+str(event.desc)+"\n"+str(tempvar))
+
+
+	for event in notimportanttasks:
+		currmonthend=month_ends[TimeMonth]
+		if TimeDay != currmonthend and event.month == TimeMonth and TimeDay == event.day:
+			hoursuntilevent = int(event.hour) - int(TimeHour) 
+
+			if int(event.minute)>=int(TimeMinute):
+				minuntilevent = int(event.minute) - int(TimeMinute)
+			else:
+				minuntilevent = (60 - int(TimeMinute))+int(event.minute)
+				#print(minuntilevent)
+				#print(TimeHour)
+				hoursuntilevent=hoursuntilevent-1
+
+
+		
+		
+		#print("hours until event: " + str(hoursuntilevent))
+		#print("minutes until event: " + str(minuntilevent))
+
+		if TimeDay == event.day and TimeMonth == event.month:
+
+			tempcount=event
+			tempvar = (str(hoursuntilevent).zfill(2) + ":" + str(minuntilevent).zfill(2))
+			tempcount.countdown=tempvar
+			event.strng = (str(event.importance)+" "+str(event.title)+" - "+ str(event.month)+" "+str(event.day)+" • "+str(event.hour)+":"+str(event.minute)+"\n"+str(event.desc)+"\n"+str(tempvar))
+
+
+
 
 	#~~~~~~~~~~~~~~~~~~~~~~ check if event is due ~~~~~~~~~~~~~~~~~~~~~~~
 
-	for j in tasks:
+	for j in veryimportanttasks:
+
+		if j.month==TimeMonth and j.day==TimeDay and j.hour==TimeHour and j.minute==TimeMinute:
+			answer = messagebox.askquestion("Timer", j.title + " is due. Is it complete?", icon='warning')
+
+			if answer == "yes":
+				
+				RemoveEvent(j)
+
+
+			elif answer == "no":
+				hoursuntilevent=hoursuntilevent+1
+				tempj = j
+				RemoveEvent(j)
+
+				if int(TimeMinute) >= int(60-int(addtime.get())) and int(TimeMinute) <= 59:
+
+					tempj.minute = str(int(tempj.minute) + int(addtime.get()) - 60)
+					tempj.hour = str(int(tempj.hour))
+
+				else:
+					
+					tempj.minute = str(int(tempj.minute) + int(addtime.get()))
+				
+				AddEvent(tempj)
+
+	for j in importanttasks:
 
 		if j.month==TimeMonth and j.day==TimeDay and j.hour==TimeHour and j.minute==TimeMinute:
 			answer = messagebox.askquestion("Timer", j.title + " is due. Is it complete?", icon='warning')
@@ -515,7 +622,31 @@ def tick():
 				AddEvent(tempj)
 
 
-	
+	for j in notimportanttasks:
+
+		if j.month==TimeMonth and j.day==TimeDay and j.hour==TimeHour and j.minute==TimeMinute:
+			answer = messagebox.askquestion("Timer", j.title + " is due. Is it complete?", icon='warning')
+
+			if answer == "yes":
+				
+				RemoveEvent(j)
+
+
+			elif answer == "no":
+				hoursuntilevent=hoursuntilevent+1
+				tempj = j
+				RemoveEvent(j)
+
+				if int(TimeMinute) >= int(60-int(addtime.get())) and int(TimeMinute) <= 59:
+
+					tempj.minute = str(int(tempj.minute) + int(addtime.get()) - 60)
+					tempj.hour = str(int(tempj.hour))
+
+				else:
+					
+					tempj.minute = str(int(tempj.minute) + int(addtime.get()))
+				
+				AddEvent(tempj)
 
 
 
@@ -696,16 +827,17 @@ def remove_event_button():
 remove = tk.Button(window, text="Remove", command=remove_event_button, fg="white", bg="sienna1")
 remove.place(x=(placement_unit_x*7.5), y=(placement_unit_y*7))
 
+print(window.winfo_width()/2)
+
 #tasks_made=tk.Label(window, textvariable=reminder_holder,fg="white", bg="grey60") ------------------------------------------------------- task made
 #tasks_made.place(x=(placement_unit_x*12), y=(placement_unit_y*1.5))
-
-tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60", wraplength=200)
+tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_veryimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
 
-tasks_made_imortant=tk.Label(window, textvariable=importanttasks_holder,fg="white", bg="grey60", wraplength=200)
+tasks_made_imortant=tk.Label(window, textvariable=importanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_imortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7.5))
 
-tasks_made_notimortant=tk.Label(window, textvariable=notimportanttasks_holder,fg="white", bg="grey60", wraplength=200)
+tasks_made_notimortant=tk.Label(window, textvariable=notimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_notimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12.5))
 
 
