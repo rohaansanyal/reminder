@@ -7,6 +7,7 @@ from tkinter import *
 from assignment import Assignment
 import platform
 import datetime
+from datetime import datetime
 
 #test
 #test 2
@@ -236,7 +237,7 @@ def tick():
 			selected_month_number=months.index(a)+1
 
 
-	"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+	#"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
 
 	#~~~~~~~~~~~~~~~~~~~~~~ updating positions ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -447,6 +448,7 @@ def tick():
 
 	#print(veryimportanttasks)
 
+
 	x = ""
 
 	for i in tasks:
@@ -454,6 +456,24 @@ def tick():
 		x = x+i.strng+"\n" 
 	
 	reminder_holder.set(x)
+
+
+	#~~~~~~~~~~~~~~~~~~~~~~~ ordering lists ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	
+	templst = []
+	for event in veryimportanttasks:
+
+		#monthsaway = (datetime.strptime(event.month, '%B').month) - (datetime.strptime(TimeMonth, '%B').month) --- do months later
+		daysaway = event.day - TimeDay
+		hoursaway = event.hour - TimeHour
+		minutesaway = event.minute - TimeMinute
+
+		totalminutesaway = (daysaway * 1440) + (hoursaway * 60) + (minutesaway)
+
+
+
+
 
 	#~~~~~~~~~~~~~~~~~~~~~~ countdown timer ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -498,6 +518,14 @@ def tick():
 				#print(TimeHour)
 				hoursuntilevent=hoursuntilevent-1
 
+		x=""
+		for i in veryimportanttasks:
+
+			x = x+i.strng+"\n" 
+
+		veryimportanttasks_holder.set(x)
+
+
 
 		
 		
@@ -523,7 +551,14 @@ def tick():
 				#print(minuntilevent)
 				#print(TimeHour)
 				hoursuntilevent=hoursuntilevent-1
+	
+		x=""
+	
+		for i in importanttasks:
 
+			x = x+i.strng+"\n" 
+
+		importanttasks_holder.set(x)
 
 		
 		
@@ -550,6 +585,13 @@ def tick():
 				#print(minuntilevent)
 				#print(TimeHour)
 				hoursuntilevent=hoursuntilevent-1
+
+		x=""
+		for i in notimportanttasks:
+
+			x = x+i.strng+"\n" 
+
+		notimportanttasks_holder.set(x)
 
 
 		
@@ -655,6 +697,7 @@ def tick():
 		tasks_shown = [i for j, i in enumerate(tasks_shown) if j not in to_be_deleted]
 
 	clockTime.after(100,tick)
+	
 
 
 
@@ -737,7 +780,6 @@ def remove_by_name(item_to_remove):
 		if item_to_remove == event_title:
 
 			notimportanttasks.remove(i)
-			print("notimporant delete")
 
 	x=""
 
