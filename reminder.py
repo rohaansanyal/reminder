@@ -451,6 +451,10 @@ def tick():
 	#print(veryimportanttasks)
 
 
+	for event in veryimportanttasks:
+
+		print(event.datetime)
+
 	x = ""
 
 	for i in tasks:
@@ -469,15 +473,35 @@ def tick():
 	templst = []
 	for event in veryimportanttasks:
 		CurrentTime = time.strftime("%m:%d:%H:%M")
-		eventTime=str(event.month + ":" + event.day + ":" + event.hour + ":" + event.minute)
+		#eventTime=str(event.month + ":" + event.day + ":" + event.hour + ":" + event.minute)
 		
 		datetimeCurrent = datetime.strptime(CurrentTime, "%m:%d:%H:%M")
 
-		datetimeEvent = datetime.strptime(eventTime, "%B:%d:%H:%M")
+		datetimeEvent = event.datetime
 
 		delta = datetimeEvent - datetimeCurrent
+		deltaSeconds = delta.total_seconds()
 
-		print(delta)
+		#print(delta)
+		#print("seconds ", delta.total_seconds())
+
+		if templst == []:
+
+			templst.append(event)
+
+		else: #sort list
+
+			for n in range(len(templst)-1):
+
+				if templst[n].datetime.total_seconds() < deltaSeconds and templst[n+1].datetime.total_seconds() > deltaSeconds:
+
+					templst.insert(n+1, event)
+
+				else:
+
+					templst.append(event)
+
+
 		
 
 
@@ -875,7 +899,7 @@ def remove_event_button():
 remove = tk.Button(window, text="Remove", command=remove_event_button, fg="white", bg="sienna1")
 remove.place(x=(placement_unit_x*7.5), y=(placement_unit_y*7))
 
-print(window.winfo_width()/2)
+#print(window.winfo_width()/2)
 
 #tasks_made=tk.Label(window, textvariable=reminder_holder,fg="white", bg="grey60") ------------------------------------------------------- task made
 #tasks_made.place(x=(placement_unit_x*12), y=(placement_unit_y*1.5))
