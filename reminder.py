@@ -221,6 +221,8 @@ def tick():
 	TimeHour=time.strftime("%H")
 	TimeMinute=time.strftime("%M")
 
+	CurrentTime = time.strftime("%m:%d:%H:%M")
+
 	to_be_deleted = []
 
 	window_width=window.winfo_width()
@@ -458,21 +460,25 @@ def tick():
 	reminder_holder.set(x)
 
 
-	#~~~~~~~~~~~~~~~~~~~~~~~ ordering lists ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	
+
+
+
+
+	#~~~~~~~~~~~~~~~~~~~~~~~ ordering lists ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	templst = []
 	for event in veryimportanttasks:
+		CurrentTime = time.strftime("%m:%d:%H:%M")
+		eventTime=str(event.month + ":" + event.day + ":" + event.hour + ":" + event.minute)
+		
+		datetimeCurrent = datetime.strptime(CurrentTime, "%m:%d:%H:%M")
 
-		#monthsaway = (datetime.strptime(event.month, '%B').month) - (datetime.strptime(TimeMonth, '%B').month) --- do months later
-		daysaway = event.day - TimeDay
-		hoursaway = event.hour - TimeHour
-		minutesaway = event.minute - TimeMinute
+		datetimeEvent = datetime.strptime(eventTime, "%B:%d:%H:%M")
 
-		totalminutesaway = (daysaway * 1440) + (hoursaway * 60) + (minutesaway)
+		delta = datetimeEvent - datetimeCurrent
 
-
-
+		print(delta)
+		
 
 
 	#~~~~~~~~~~~~~~~~~~~~~~ countdown timer ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
