@@ -2,7 +2,7 @@ from datetime import datetime
 
 class Assignment():
 
-	def __init__(self, title, desc, importance, month, day, hour, minute, countdown, datetime):
+	def __init__(self, title, desc, importance, month, day, hour, minute, countdown):
 
 		self.importance = importance
 		self.month = month
@@ -14,5 +14,5 @@ class Assignment():
 		self.countdown = countdown
 		self.strng = (str(importance)+" "+str(title)+" - "+ str(month)+" "+str(day)+" • "+str(hour)+":"+str(minute)+"\n"+str(desc)+"\n"+str(countdown))
 		
-		eventTime=str(event.month + ":" + event.day + ":" + event.hour + ":" + event.minute)
+		eventTime=str(month + ":" + day + ":" + hour + ":" + minute)
 		self.datetime = datetime.strptime(eventTime, "%B:%d:%H:%M")

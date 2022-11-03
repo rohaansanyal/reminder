@@ -471,6 +471,7 @@ def tick():
 
 	#~~~~~~~~~~~~~~~~~~~~~~~ ordering lists ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	templst = []
+
 	for event in veryimportanttasks:
 		CurrentTime = time.strftime("%m:%d:%H:%M")
 		#eventTime=str(event.month + ":" + event.day + ":" + event.hour + ":" + event.minute)
@@ -482,13 +483,16 @@ def tick():
 		delta = datetimeEvent - datetimeCurrent
 		deltaSeconds = delta.total_seconds()
 
+		templst.append(deltaSeconds)
+
+
+
+
 		#print(delta)
 		#print("seconds ", delta.total_seconds())
-
-		if templst == []:
-
+'''
+		if(templst == [])
 			templst.append(event)
-
 		else: #sort list
 
 			for n in range(len(templst)-1):
@@ -500,6 +504,8 @@ def tick():
 				else:
 
 					templst.append(event)
+
+		'''
 
 
 		
