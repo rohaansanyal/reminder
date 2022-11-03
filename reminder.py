@@ -483,14 +483,16 @@ def tick():
 		delta = datetimeEvent - datetimeCurrent
 		deltaSeconds = delta.total_seconds()
 
-		templst.append(deltaSeconds)
+		templst.append(event)
+
+	templst.sort()
+	print(templst)
 
 
 
-
+	"""
 		#print(delta)
 		#print("seconds ", delta.total_seconds())
-'''
 		if(templst == [])
 			templst.append(event)
 		else: #sort list
@@ -504,18 +506,13 @@ def tick():
 				else:
 
 					templst.append(event)
-
-		'''
-
-
-		
+	"""
 
 
 	#~~~~~~~~~~~~~~~~~~~~~~ countdown timer ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	#24:00:00 -> 23:59:59
-
 	for event in tasks:
+
 		currmonthend=month_ends[TimeMonth]
 		if TimeDay != currmonthend and event.month == TimeMonth and TimeDay == event.day:
 			hoursuntilevent = int(event.hour) - int(TimeHour) 

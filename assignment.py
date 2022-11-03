@@ -1,4 +1,5 @@
 from datetime import datetime
+import time
 
 class Assignment():
 
@@ -14,5 +15,11 @@ class Assignment():
 		self.countdown = countdown
 		self.strng = (str(importance)+" "+str(title)+" - "+ str(month)+" "+str(day)+" • "+str(hour)+":"+str(minute)+"\n"+str(desc)+"\n"+str(countdown))
 		
-		eventTime=str(month + ":" + day + ":" + hour + ":" + minute)
-		self.datetime = datetime.strptime(eventTime, "%B:%d:%H:%M")
+		
+		#today = datetime.date.today()
+		#year = today.year
+
+		currentyear = time.strftime("%y")
+
+		eventTime=str(currentyear+"-"+month + ":" + day + ":" + hour + ":" + minute)
+		self.datetime = datetime.strptime(eventTime, "%y-%B:%d:%H:%M")
