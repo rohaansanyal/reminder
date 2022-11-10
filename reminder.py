@@ -485,6 +485,20 @@ def tick():
 
 		templst.append(event)
 
+
+	if templst.len() > 1:
+		n = len(templst)
+		swapped = False
+		for i in range(n-1):
+			for j in range (0 , n-i-1):
+				if (templst[j].datetime - datetimeCurrent).total_seconds() > (templst[j+1].datetime - datetimeCurrent).total_seconds():
+					swapped = True
+					
+
+		for event in templst: #for every event
+			for i in range(1, len(templst)): #checkign with other events
+				if (event.datetime - datetimeCurrent).total_seconds() > templst[i-1]
+
 	templst.sort()
 	print(templst)
 

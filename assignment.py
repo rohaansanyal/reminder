@@ -22,4 +22,11 @@ class Assignment():
 		currentyear = time.strftime("%y")
 
 		eventTime=str(currentyear+"-"+month + ":" + day + ":" + hour + ":" + minute)
+
+		CurrentTime = time.strftime("%m:%d:%H:%M")
+		
 		self.datetime = datetime.strptime(eventTime, "%y-%B:%d:%H:%M")
+
+		delta = self.datetime - datetimeCurrent
+		
+		self.second = delta.total_seconds()
