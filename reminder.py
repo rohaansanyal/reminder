@@ -451,9 +451,9 @@ def tick():
 	#print(veryimportanttasks)
 
 
-	for event in veryimportanttasks:
+	#for event in veryimportanttasks:
 
-		print(event.datetime)
+	#	print(event.datetime)
 
 	x = ""
 
@@ -486,21 +486,28 @@ def tick():
 		templst.append(event)
 
 
-	if templst.len() > 1:
+	if len(templst) > 1:
 		n = len(templst)
 		swapped = False
+		
 		for i in range(n-1):
+			
 			for j in range (0 , n-i-1):
+			
 				if (templst[j].datetime - datetimeCurrent).total_seconds() > (templst[j+1].datetime - datetimeCurrent).total_seconds():
+			
 					swapped = True
-					
+					templst[j], templst[j+1] = templst[j+1], templst[j]
 
-		for event in templst: #for every event
-			for i in range(1, len(templst)): #checkign with other events
-				if (event.datetime - datetimeCurrent).total_seconds() > templst[i-1]
+			if not swapped:
 
-	templst.sort()
+				return		
+	
+	print("templst")
 	print(templst)
+	print("veryimportanttasks")
+	print(veryimportanttasks)
+	print()
 
 
 

@@ -21,12 +21,21 @@ class Assignment():
 
 		currentyear = time.strftime("%y")
 
-		eventTime=str(currentyear+"-"+month + ":" + day + ":" + hour + ":" + minute)
+		if len(hour) == 1:
+
+			newhour = hour
+			newhour = "0" + eventhour
+
+		else:
+
+			newhour = hour
+
+		eventTime=str(currentyear+" "+month + " " + day + ":" + newhour + ":" + minute)
 
 		CurrentTime = time.strftime("%m:%d:%H:%M")
 		
-		self.datetime = datetime.strptime(eventTime, "%y-%B:%d:%H:%M")
+		self.datetime = datetime.strptime(eventTime, "%y %B %d:%H:%M")
 
-		delta = self.datetime - datetimeCurrent
+		#delta = self.datetime - CurrentTime
 		
-		self.second = delta.total_seconds()
+		#self.second = delta.total_seconds()
