@@ -502,13 +502,26 @@ def tick():
 			if not swapped:
 
 				return		
-	
-	print("templst")
-	print(templst)
-	print("veryimportanttasks")
-	print(veryimportanttasks)
-	print()
 
+
+		
+
+
+		print(veryimportanttasks)
+		veryimportanttasks.clear()
+
+		i=0
+
+		for i in range(0, len(templst)):
+			veryimportanttasks.append(templst[i])
+
+
+		print(veryimportanttasks)
+		
+	
+	
+
+	
 
 
 	"""
