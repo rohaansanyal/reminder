@@ -485,11 +485,15 @@ def tick():
 
 		templst.append(event)
 
-		selection_sort(templst,len(templst))
-
 		veryimportanttasks.clear()
 
-		i=0
+		sortedlst = selection_sort(templst,len(templst))
+
+		veryimportanttasks.append(sortedlst)
+
+		print(sortedlst)
+		print(veryimportanttasks)
+		print()
 
 
 		#i=0
@@ -757,28 +761,9 @@ def tick():
 	
 
 def selection_sort(unsorted, n):
-    
-    # iterate over array
-    for i in range(0, n):
-        
-        # initialise with first value
-        current_min = (unsorted[i].datetime - datetimeCurrent).total_seconds()
-        
-        # min_index initialiser
-        min_index = i
-        
-        # iterate over remaining unsorted items
-        for j in range(i, n):
-            
-            # check if jth value is less than current min
-            if (unsorted[j].datetime - datetimeCurrent).total_seconds() < current_min:
-              
-                # update minimum value and index
-                current_min = (unsorted[j].datetime - datetimeCurrent).total_seconds()
-                min_index = j
-                
-        # swap ith and jth values
-        swap(unsorted, i, min_index)
+	
+	def swap(arr, a, b):
+	    """ swap elements a and b in an array """
 	    temp = arr[a]
 	    arr[a] = arr[b]
 	    arr[b] = temp
