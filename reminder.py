@@ -485,7 +485,16 @@ def tick():
 
 		templst.append(event)
 
+		selection_sort(templst,len(templst))
 
+		veryimportanttasks.clear()
+
+		i=0
+
+		for i in range(0, len(templst)):
+			veryimportanttasks.append(templst[i])
+
+		''' --------------------------------------bubble sort(doesn't work)--------------------
 	if len(templst) > 1:
 		n = len(templst)
 		swapped = False
@@ -503,28 +512,6 @@ def tick():
 
 				return		
 
-
-		
-
-
-		print(veryimportanttasks)
-		veryimportanttasks.clear()
-
-		i=0
-
-		for i in range(0, len(templst)):
-			veryimportanttasks.append(templst[i])
-
-
-		print(veryimportanttasks)
-		
-	
-	
-
-	
-
-
-	"""
 		#print(delta)
 		#print("seconds ", delta.total_seconds())
 		if(templst == [])
@@ -540,7 +527,7 @@ def tick():
 				else:
 
 					templst.append(event)
-	"""
+	'''
 
 
 	#~~~~~~~~~~~~~~~~~~~~~~ countdown timer ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -766,6 +753,29 @@ def tick():
 	clockTime.after(100,tick)
 	
 
+def selection_sort(unsorted, n):
+    
+    # iterate over array
+    for i in range(0, n):
+        
+        # initialise with first value
+        current_min = (unsorted[i].datetime - datetimeCurrent).total_seconds()
+        
+        # min_index initialiser
+        min_index = i
+        
+        # iterate over remaining unsorted items
+        for j in range(i, n):
+            
+            # check if jth value is less than current min
+            if (unsorted[j].datetime - datetimeCurrent).total_seconds() < current_min:
+              
+                # update minimum value and index
+                current_min = (unsorted[j].datetime - datetimeCurrent).total_seconds()
+                min_index = j
+                
+        # swap ith and jth values
+        swap(unsorted, i, min_index)
 
 
 def remove_by_name(item_to_remove):
