@@ -491,8 +491,11 @@ def tick():
 
 		i=0
 
-		for i in range(0, len(templst)):
-			veryimportanttasks.append(templst[i])
+
+		#i=0
+
+		#for i in range(0, len(templst)):
+		#	veryimportanttasks.append(templst[i])
 
 		''' --------------------------------------bubble sort(doesn't work)--------------------
 	if len(templst) > 1:
@@ -776,6 +779,35 @@ def selection_sort(unsorted, n):
                 
         # swap ith and jth values
         swap(unsorted, i, min_index)
+	    temp = arr[a]
+	    arr[a] = arr[b]
+	    arr[b] = temp
+
+	CurrentTime = time.strftime("%m:%d:%H:%M")
+	datetimeCurrent = datetime.strptime(CurrentTime, "%m:%d:%H:%M")
+
+	for i in range(0, n):
+		
+		# initialise with first value
+		current_min = (unsorted[i].datetime - datetimeCurrent).total_seconds()
+		
+		# min_index initialiser
+		min_index = i
+		
+		# iterate over remaining unsorted items
+		for j in range(i, n):
+			
+			# check if jth value is less than current min
+			if (unsorted[j].datetime - datetimeCurrent).total_seconds() < current_min:
+			  
+				# update minimum value and index
+				current_min = (unsorted[j].datetime - datetimeCurrent).total_seconds()
+				min_index = j
+				
+		# swap ith and jth values
+		swap(unsorted, i, min_index)
+
+	return(arr)
 
 
 def remove_by_name(item_to_remove):
@@ -1004,7 +1036,7 @@ def reminder_confirm():
 					correct_time=True
 		else:
 			correct_time=True
-								              
+											  
 	if correct_time==False:
 		messagebox.showerror(title="Invalid Alarm", message="Your alarm needs to be set at a date that has not passed yet.")
 
