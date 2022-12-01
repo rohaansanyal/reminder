@@ -1,40 +1,6 @@
 from datetime import datetime
 import time
 
-def selection_sort(unsorted, n):
-	
-	def swap(arr, a, b):
-	    """ swap elements a and b in an array """
-	    temp = arr[a]
-	    arr[a] = arr[b]
-	    arr[b] = temp
-
-	CurrentTime = time.strftime("%m:%d:%H:%M")
-	datetimeCurrent = datetime.strptime(CurrentTime, "%m:%d:%H:%M")
-
-	for i in range(0, n):
-		
-		# initialise with first value
-		current_min = (unsorted[i].datetime - datetimeCurrent).total_seconds()
-		
-		# min_index initialiser
-		min_index = i
-		
-		# iterate over remaining unsorted items
-		for j in range(i, n):
-			
-			# check if jth value is less than current min
-			if (unsorted[j].datetime - datetimeCurrent).total_seconds() < current_min:
-			  
-				# update minimum value and index
-				current_min = (unsorted[j].datetime - datetimeCurrent).total_seconds()
-				min_index = j
-				
-		# swap ith and jth values
-		swap(unsorted, i, min_index)
-
-	return(arr)
-
 class Assignment():
 
 	def __init__(self, title, desc, importance, month, day, hour, minute, countdown):

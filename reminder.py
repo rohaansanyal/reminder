@@ -470,38 +470,25 @@ def tick():
 
 
 	#~~~~~~~~~~~~~~~~~~~~~~~ ordering lists ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	templst = []
+
+	templst = selection_sort(veryimportanttasks,len(veryimportanttasks))
+
+	veryimportanttasks.clear()
+
+	veryimporanttasks = templst
 
 	for event in veryimportanttasks:
-		CurrentTime = time.strftime("%m:%d:%H:%M")
-		#eventTime=str(event.month + ":" + event.day + ":" + event.hour + ":" + event.minute)
-		
-		datetimeCurrent = datetime.strptime(CurrentTime, "%m:%d:%H:%M")
 
-		datetimeEvent = event.datetime
-
-		delta = datetimeEvent - datetimeCurrent
-		deltaSeconds = delta.total_seconds()
-
-		templst.append(event)
-
-		veryimportanttasks.clear()
-
-		sortedlst = selection_sort(templst,len(templst))
-
-		for i in range(0, len(sortedlst)):
-			print(sortedlst[0])
-
-		#veryimportanttasks.append(sortedlst)
+		print(event.datetime)
+		print(event.title)
+		print()
 
 
+	#i=0
+	#for i in range(0, len(templst)):
+	#	veryimportanttasks.append(templst[i])
 
-		#i=0
-
-		#for i in range(0, len(templst)):
-		#	veryimportanttasks.append(templst[i])
-
-		''' --------------------------------------bubble sort(doesn't work)--------------------
+	''' --------------------------------------bubble sort(doesn't work)--------------------
 	if len(templst) > 1:
 		n = len(templst)
 		swapped = False
@@ -764,7 +751,7 @@ def selection_sort(unsorted, n):
 	
 	def swap(arr, a, b):
 	    """ swap elements a and b in an array """
-	    print("-----------------SwapRan-------------------")
+	   # print("-----------------SwapRan-------------------")
 	    temp = arr[a]
 	    arr[a] = arr[b]
 	    arr[b] = temp
@@ -773,8 +760,13 @@ def selection_sort(unsorted, n):
 	CurrentTime = time.strftime("%m:%d:%H:%M")
 	datetimeCurrent = datetime.strptime(CurrentTime, "%m:%d:%H:%M")
 
+	sortedlst = []
+
 	for i in range(0, n):
-		print("------------------------------selectionSortForLoopRan-----------------------------------")
+		#print("------------------------------selectionSortForLoopRan-----------------------------------")
+
+		check_swap = False
+
 		# initialise with first value
 		current_min = (unsorted[i].datetime - datetimeCurrent).total_seconds()
 		
@@ -790,9 +782,11 @@ def selection_sort(unsorted, n):
 				# update minimum value and index
 				current_min = (unsorted[j].datetime - datetimeCurrent).total_seconds()
 				min_index = j
-				
+				check_swap = True
+
 		# swap ith and jth values
-		sortedlst = swap(unsorted, i, min_index)
+		sortedlst.clear()
+		sortedlst.append(swap(unsorted, i, min_index))
 
 	return(sortedlst)
 
