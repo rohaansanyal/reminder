@@ -489,11 +489,11 @@ def tick():
 
 		sortedlst = selection_sort(templst,len(templst))
 
-		veryimportanttasks.append(sortedlst)
+		for i in range(0, len(sortedlst)):
+			print(sortedlst[0])
 
-		print(sortedlst)
-		print(veryimportanttasks)
-		print()
+		#veryimportanttasks.append(sortedlst)
+
 
 
 		#i=0
@@ -764,15 +764,17 @@ def selection_sort(unsorted, n):
 	
 	def swap(arr, a, b):
 	    """ swap elements a and b in an array """
+	    print("-----------------SwapRan-------------------")
 	    temp = arr[a]
 	    arr[a] = arr[b]
 	    arr[b] = temp
+	    return(arr)
 
 	CurrentTime = time.strftime("%m:%d:%H:%M")
 	datetimeCurrent = datetime.strptime(CurrentTime, "%m:%d:%H:%M")
 
 	for i in range(0, n):
-		
+		print("------------------------------selectionSortForLoopRan-----------------------------------")
 		# initialise with first value
 		current_min = (unsorted[i].datetime - datetimeCurrent).total_seconds()
 		
@@ -790,9 +792,9 @@ def selection_sort(unsorted, n):
 				min_index = j
 				
 		# swap ith and jth values
-		swap(unsorted, i, min_index)
+		sortedlst = swap(unsorted, i, min_index)
 
-	return(arr)
+	return(sortedlst)
 
 
 def remove_by_name(item_to_remove):
