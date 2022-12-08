@@ -472,58 +472,8 @@ def tick():
 	#~~~~~~~~~~~~~~~~~~~~~~~ ordering lists ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	templst = selection_sort(veryimportanttasks,len(veryimportanttasks))
-
-	for event in templst:
-
-		print(event.datetime)
-		print(event.title)
-
-
-	#veryimportanttasks.clear()
-
-	#veryimporanttasks = templst
-
-	
-
-	#i=0
-	#for i in range(0, len(templst)):
-	#	veryimportanttasks.append(templst[i])
-
-	''' --------------------------------------bubble sort(doesn't work)--------------------
-	if len(templst) > 1:
-		n = len(templst)
-		swapped = False
-		
-		for i in range(n-1):
-			
-			for j in range (0 , n-i-1):
-			
-				if (templst[j].datetime - datetimeCurrent).total_seconds() > (templst[j+1].datetime - datetimeCurrent).total_seconds():
-			
-					swapped = True
-					templst[j], templst[j+1] = templst[j+1], templst[j]
-
-			if not swapped:
-
-				return		
-
-		#print(delta)
-		#print("seconds ", delta.total_seconds())
-		if(templst == [])
-			templst.append(event)
-		else: #sort list
-
-			for n in range(len(templst)-1):
-
-				if templst[n].datetime.total_seconds() < deltaSeconds and templst[n+1].datetime.total_seconds() > deltaSeconds:
-
-					templst.insert(n+1, event)
-
-				else:
-
-					templst.append(event)
-	'''
-
+	importanttemplst = selection_sort(importanttasks, len(importanttasks))
+	notimportanttemplst = selection_sort(notimportanttasks, len(notimportanttasks))
 
 	#~~~~~~~~~~~~~~~~~~~~~~ countdown timer ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -791,50 +741,7 @@ def selection_sort(unsorted, n):
 
 	return(sortedlst)
 	
-'''
-def selection_sort(unsorted, n):
-	
-	def swap(arr, a, b):
-	    """ swap elements a and b in an array """
-	   # print("-----------------SwapRan-------------------")
-	    temp = arr[a]
-	    arr[a] = arr[b]
-	    arr[b] = temp
-	    return(arr)
 
-	CurrentTime = time.strftime("%m:%d:%H:%M")
-	datetimeCurrent = datetime.strptime(CurrentTime, "%m:%d:%H:%M")
-
-	sortedlst = []
-
-	for i in range(0, n):
-		#print("------------------------------selectionSortForLoopRan-----------------------------------")
-
-		check_swap = False
-
-		# initialise with first value
-		current_min = (unsorted[i].datetime - datetimeCurrent).total_seconds()
-		
-		# min_index initialiser
-		min_index = i
-		
-		# iterate over remaining unsorted items
-		for j in range(i, n):
-			
-			# check if jth value is less than current min
-			if (unsorted[j].datetime - datetimeCurrent).total_seconds() < current_min:
-			  
-				# update minimum value and index
-				current_min = (unsorted[j].datetime - datetimeCurrent).total_seconds()
-				min_index = j
-				check_swap = True
-
-		# swap ith and jth values
-		sortedlst.clear()
-		sortedlst.append(swap(unsorted, i, min_index))
-
-	return(sortedlst)
-'''
 
 def remove_by_name(item_to_remove):
 
