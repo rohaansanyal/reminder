@@ -220,8 +220,9 @@ def tick():
 	TimeDay=time.strftime("%d")
 	TimeHour=time.strftime("%H")
 	TimeMinute=time.strftime("%M")
-
 	CurrentTime = time.strftime("%m:%d:%H:%M")
+	datetimeCurrent = datetime.strptime(CurrentTime, "%m:%d:%H:%M")
+
 
 	to_be_deleted = []
 
@@ -612,7 +613,9 @@ def tick():
 
 	for j in veryimportanttasks:
 
-		if j.month==TimeMonth and j.day==TimeDay and j.hour==TimeHour and j.minute==TimeMinute:
+
+		print((j.datetime - datetimeCurrent).total_seconds())
+		if (j.datetime - datetimeCurrent).total_seconds() == 0:
 			answer = messagebox.askquestion("Timer", j.title + " is due. Is it complete?", icon='warning')
 
 			if answer == "yes":
