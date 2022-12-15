@@ -703,7 +703,7 @@ def selection_sort(unsorted, n):
 
 	def swap(arr, a, b):
 	    """ swap elements a and b in an array """
-	    print("-----------------SwapRan-------------------")
+
 	    temp = arr[a]
 	    arr[a] = arr[b]
 	    arr[b] = temp
@@ -715,7 +715,7 @@ def selection_sort(unsorted, n):
 	lstsorted = False
 
 	for i in range(0, n):
-		print("------------------------------selectionSortForLoopRan-----------------------------------")
+
 
 		check_swap = False
 
@@ -836,7 +836,7 @@ def AddEvent(event):
 	tasks.append(event)
 	x = ""
 
-	for i in veryimportanttasks:
+	for i in tasks:
 
 		x = x+i.strng+"\n"
 
@@ -885,24 +885,54 @@ def AddEvent(event):
 
 
 def RemoveEvent(event):
-	
 	tasks.remove(event)
-
-	"""
-
-	x=""
+	x = ""
 
 	for i in tasks:
-
-		if event.title in i.strng:
-
-			tasks.remove(i)
 
 		x = x+i.strng+"\n"
 
 	reminder_holder.set(x)
+
+	if event.importance == "Very Important":
 	
-	"""
+		veryimportanttasks.remove(event)
+
+		x = ""
+
+		for i in veryimportanttasks:
+
+			x = x+i.strng+"\n"
+
+		veryimportanttasks_holder.set(x)
+
+	elif event.importance == "Important":
+
+		importanttasks.remove(event)
+
+		x = ""
+
+		for i in importanttasks:
+
+			x = x+i.strng+"\n"
+
+		importanttasks_holder.set(x)
+
+	elif event.importance == "Not Important":
+
+		notimportanttasks.remove(event)
+
+		x = ""
+
+		for i in notimportanttasks:
+
+			x = x+i.strng+"\n"
+
+		notimportanttasks_holder.set(x)
+
+	x=""
+
+
 
 def remove_event_button():
 
