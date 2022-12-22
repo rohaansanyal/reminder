@@ -14,6 +14,11 @@ class Assignment():
 		self.desc = desc
 		self.countdown = countdown
 		self.strng = (str(importance)+" "+str(title)+" - "+ str(month)+" "+str(day)+" • "+str(hour)+":"+str(minute)+"\n"+str(desc)+"\n"+str(countdown))
+
+
+
+		self.oneMinuteCheck = False
+		self.fiveMinuteCheck = False
 		
 		
 		#today = datetime.date.today()

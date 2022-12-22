@@ -220,8 +220,8 @@ def tick():
 	TimeDay=time.strftime("%d")
 	TimeHour=time.strftime("%H")
 	TimeMinute=time.strftime("%M")
-	CurrentTime = time.strftime("%m:%d:%H:%M")
-	datetimeCurrent = datetime.strptime(CurrentTime, "%m:%d:%H:%M")
+	CurrentTime = time.strftime("%y:%m:%d:%H:%M")
+	datetimeCurrent = datetime.strptime(CurrentTime, "%y:%m:%d:%H:%M")
 
 
 	to_be_deleted = []
@@ -613,8 +613,32 @@ def tick():
 
 	for j in veryimportanttasks:
 
+		if (j.datetime - datetimeCurrent).total_seconds() == 300 and j.fiveMinuteCheck == False:
 
-		print((j.datetime - datetimeCurrent).total_seconds())
+			answer = messagebox.askquestion("Timer", j.title + " is due in a 5 minutes. Is it complete?", icon='warning')
+
+			if answer == "yes":
+				
+				RemoveEvent(j)
+
+			j.fiveMinuteCheck = True
+
+
+		for j in veryimportanttasks:
+
+		if (j.datetime - datetimeCurrent).total_seconds() == 60 and j.oneMinuteCheck == False:
+
+			answer = messagebox.askquestion("Timer", j.title + " is due in a 1 minutes. Is it complete?", icon='warning')
+
+			if answer == "yes":
+				
+				RemoveEvent(j)
+
+			j.oneMinuteCheck = True
+				
+
+
+
 		if (j.datetime - datetimeCurrent).total_seconds() == 0:
 			answer = messagebox.askquestion("Timer", j.title + " is due. Is it complete?", icon='warning')
 
