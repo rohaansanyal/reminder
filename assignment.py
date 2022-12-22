@@ -15,12 +15,16 @@ class Assignment():
 		self.countdown = countdown
 		self.strng = (str(importance)+" "+str(title)+" - "+ str(month)+" "+str(day)+" • "+str(hour)+":"+str(minute)+"\n"+str(desc)+"\n"+str(countdown))
 
-
-
 		self.oneMinuteCheck = False
 		self.fiveMinuteCheck = False
+		self.tenMinuteCheck = False
+		self.thirtyMinuteCheck = False
+		self.oneHourCheck = False
 		
-		
+		#veryimportant reminder times - 1hr 30m 10m 5m 1m
+		#important reminder times - 30m 5m 1m
+		#notimportant reminder times - 1m
+
 		#today = datetime.date.today()
 		#year = today.year
 

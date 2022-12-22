@@ -159,6 +159,18 @@ def set_current_date():
 	selected_hour.set(time.strftime("%H"))
 	selected_minutes.set(time.strftime("%M"))
 
+def notify(time, title): 
+
+	if time == '0 minutes':
+
+		answer = messagebox.askquestion("Timer", str(title) + " is due. Is it complete?", icon='warning')
+
+	else:
+
+		answer = messagebox.askquestion("Timer", str(title) + " is due in " + str(time) + ". Is it complete?", icon='warning')
+
+	return answer
+
 
 current_date = tk.Button(window, text="Set Current Time", command=set_current_date, fg="white", bg="sienna1")
 current_date.place(x=(placement_unit_x*7.5), y=(placement_unit_y*1.5))
@@ -613,9 +625,32 @@ def tick():
 
 	for j in veryimportanttasks:
 
+		secondsaway = (j.datetime - datetimeCurrent).total_seconds()
+
+		if secondsaway == 3600 and j.oneHourCheck == False:
+
+			answer = notify('1 hour', j.title)
+
+			if answer == "yes":
+
+				RemoveEvent(j)
+
+		j.oneHourCheck = True
+
+		if secondsaway == 1800 and j.thirtyMinuteCheck == False:
+
+			answer = notify('30 minutes', j.title)
+
+			if answer == "yes":
+
+				RemoveEvent(j)
+
+			j.thirtyMinuteCheck = True
+
+
 		if (j.datetime - datetimeCurrent).total_seconds() == 300 and j.fiveMinuteCheck == False:
 
-			answer = messagebox.askquestion("Timer", j.title + " is due in a 5 minutes. Is it complete?", icon='warning')
+			answer = notify('5 minutes', j.title)
 
 			if answer == "yes":
 				
@@ -623,12 +658,9 @@ def tick():
 
 			j.fiveMinuteCheck = True
 
-
-		for j in veryimportanttasks:
-
 		if (j.datetime - datetimeCurrent).total_seconds() == 60 and j.oneMinuteCheck == False:
 
-			answer = messagebox.askquestion("Timer", j.title + " is due in a 1 minutes. Is it complete?", icon='warning')
+			answer = notify('1 minute', j.title)
 
 			if answer == "yes":
 				
@@ -637,10 +669,9 @@ def tick():
 			j.oneMinuteCheck = True
 				
 
-
-
 		if (j.datetime - datetimeCurrent).total_seconds() == 0:
-			answer = messagebox.askquestion("Timer", j.title + " is due. Is it complete?", icon='warning')
+
+			answer = notify('0 minutes', j.title)
 
 			if answer == "yes":
 				
@@ -663,10 +694,45 @@ def tick():
 				
 				AddEvent(tempj)
 
+
+
 	for j in importanttasks:
 
-		if j.month==TimeMonth and j.day==TimeDay and j.hour==TimeHour and j.minute==TimeMinute:
-			answer = messagebox.askquestion("Timer", j.title + " is due. Is it complete?", icon='warning')
+		secondsaway = (j.datetime - datetimeCurrent).total_seconds()
+
+		if secondsaway == 1800 and j.thirtyMinuteCheck == False:
+
+			answer = notify('30 minutes', j.title)
+
+			if answer == "yes":
+
+				RemoveEvent(j)
+
+			j.thirtyMinuteCheck = True
+
+		if (j.datetime - datetimeCurrent).total_seconds() == 300 and j.fiveMinuteCheck == False:
+
+			answer = notify('5 minutes', j.title)
+
+			if answer == "yes":
+				
+				RemoveEvent(j)
+
+			j.fiveMinuteCheck = True	
+
+		if (j.datetime - datetimeCurrent).total_seconds() == 60 and j.oneMinuteCheck == False:
+
+			answer = notify('1 minute', j.title)
+
+			if answer == "yes":
+				
+				RemoveEvent(j)
+
+			j.oneMinuteCheck = True
+
+		if secondsaway == 0:
+
+			answer = notify('0 minutes', j.title)
 
 			if answer == "yes":
 				
@@ -692,8 +758,21 @@ def tick():
 
 	for j in notimportanttasks:
 
-		if j.month==TimeMonth and j.day==TimeDay and j.hour==TimeHour and j.minute==TimeMinute:
-			answer = messagebox.askquestion("Timer", j.title + " is due. Is it complete?", icon='warning')
+		secondsaway = (j.datetime - datetimeCurrent).total_seconds()
+
+		if (j.datetime - datetimeCurrent).total_seconds() == 60 and j.oneMinuteCheck == False:
+
+			answer = notify('1 minute', j.title)
+
+			if answer == "yes":
+				
+				RemoveEvent(j)
+
+			j.oneMinuteCheck = True
+
+		if secondsaway == 0:
+
+			notify('0 minutes', j.title)
 
 			if answer == "yes":
 				
