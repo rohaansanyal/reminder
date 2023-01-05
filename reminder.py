@@ -151,7 +151,10 @@ clockTime.place(x=(window_width/2), y=0)
 
 addtime = tk.StringVar(window, "10")
 not_completed_addtime = tk.Entry(window, text=addtime)
-not_completed_addtime.place(x=(placement_unit_x*2.5), y=(placement_unit_y*17))
+not_completed_addtime.place(x=(placement_unit_x*1.5), y=(placement_unit_y*16.5))
+
+snoozeLabel = tk.Label(window, text="Snooze Time", bg = "sienna1")
+snoozeLabel.place(x=(placement_unit_x*0.5), y =(placement_unit_y*16.5))
 
 def set_current_date():
 	selected_day.set(time.strftime("%d"))
@@ -280,8 +283,6 @@ def tick():
 	entry_completed.place(x=(placement_unit_x*4.5), y=(placement_unit_y*8.5))
 
 	clockTime.place(x=(window_width/2), y=0)
-
-	not_completed_addtime.place(x=(placement_unit_x*2.5), y=(placement_unit_y*17))
 
 	current_date.place(x=(placement_unit_x*7.5), y=(placement_unit_y*3))
 
@@ -679,6 +680,18 @@ def tick():
 
 
 			elif answer == "no":
+				j.datetime = j.datetime + timedelta(minutes=int(addtime.get()))
+
+				j.month = (j.datetime).strftime("%B")
+
+				j.day = (j.datetime).strftime("%d")
+
+				j.hour = (j.datetime).strftime("%H")
+
+				j.minute = (j.datetime).strftime("%M")
+
+				
+				'''
 				hoursuntilevent=hoursuntilevent+1
 				tempj = j
 				RemoveEvent(j)
@@ -693,7 +706,7 @@ def tick():
 					tempj.minute = str(int(tempj.minute) + int(addtime.get()))
 				
 				AddEvent(tempj)
-
+				'''
 
 
 	for j in importanttasks:
@@ -740,20 +753,15 @@ def tick():
 
 
 			elif answer == "no":
-				hoursuntilevent=hoursuntilevent+1
-				tempj = j
-				RemoveEvent(j)
+				j.datetime = j.datetime + timedelta(minutes=int(addtime.get()))
 
-				if int(TimeMinute) >= int(60-int(addtime.get())) and int(TimeMinute) <= 59:
+				j.month = (j.datetime).strftime("%B")
 
-					tempj.minute = str(int(tempj.minute) + int(addtime.get()) - 60)
-					tempj.hour = str(int(tempj.hour))
+				j.day = (j.datetime).strftime("%d")
 
-				else:
-					
-					tempj.minute = str(int(tempj.minute) + int(addtime.get()))
-				
-				AddEvent(tempj)
+				j.hour = (j.datetime).strftime("%H")
+
+				j.minute = (j.datetime).strftime("%M")
 
 
 	for j in notimportanttasks:
@@ -772,7 +780,7 @@ def tick():
 
 		if secondsaway == 0:
 
-			notify('0 minutes', j.title)
+			answer = notify('0 minutes', j.title)
 
 			if answer == "yes":
 				
@@ -780,20 +788,16 @@ def tick():
 
 
 			elif answer == "no":
-				hoursuntilevent=hoursuntilevent+1
-				tempj = j
-				RemoveEvent(j)
+				print("no answer ran")
+				j.datetime = j.datetime + timedelta(minutes=itn(addtime.get()))
 
-				if int(TimeMinute) >= int(60-int(addtime.get())) and int(TimeMinute) <= 59:
+				j.month = (j.datetime).strftime("%B")
 
-					tempj.minute = str(int(tempj.minute) + int(addtime.get()) - 60)
-					tempj.hour = str(int(tempj.hour))
+				j.day = (j.datetime).strftime("%d")
 
-				else:
-					
-					tempj.minute = str(int(tempj.minute) + int(addtime.get()))
-				
-				AddEvent(tempj)
+				j.hour = (j.datetime).strftime("%H")
+
+				j.minute = (j.datetime).strftime("%M")
 
 
 
