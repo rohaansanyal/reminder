@@ -9,8 +9,8 @@ import platform
 import datetime
 from datetime import datetime
 
-#test
-#test 2
+with open('reminder_text_file', 'w') as text:
+	text.write("")	
 
 window = tk.Tk()
 window.title("Habitude")
@@ -956,6 +956,9 @@ def AddEvent(event):
 
 	if event.importance == "Very Important":
 
+		with open('reminder_text_file', 'a') as text:
+			text.write(event.strng)	
+
 		veryimportanttasks.append(event)
 
 		x = ""
@@ -968,6 +971,10 @@ def AddEvent(event):
 
 	elif event.importance == "Important":
 
+		with open('reminder_text_file', 'a') as text:
+			text.write(event.strng)	
+
+
 		importanttasks.append(event)
 
 		x = ""
@@ -979,6 +986,10 @@ def AddEvent(event):
 		importanttasks_holder.set(x)
 
 	elif event.importance == "Not Important":
+
+		with open('reminder_text_file', 'a') as text:
+			text.write(event.strng)	
+
 
 		notimportanttasks.append(event)
 
