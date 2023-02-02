@@ -8,6 +8,7 @@ from assignment import Assignment
 import platform
 import datetime
 from datetime import datetime
+import os
 
 with open('reminder_text_file', 'w') as text:
 	text.write("")	
@@ -956,7 +957,7 @@ def AddEvent(event):
 
 	if event.importance == "Very Important":
 
-		with open('reminder_text_file', 'a') as text:
+		with open('veryImportant', 'a') as text:
 			text.write(event.strng)	
 
 		veryimportanttasks.append(event)
@@ -971,7 +972,7 @@ def AddEvent(event):
 
 	elif event.importance == "Important":
 
-		with open('reminder_text_file', 'a') as text:
+		with open('important', 'a') as text:
 			text.write(event.strng)	
 
 
@@ -987,7 +988,7 @@ def AddEvent(event):
 
 	elif event.importance == "Not Important":
 
-		with open('reminder_text_file', 'a') as text:
+		with open('notImportant', 'a') as text:
 			text.write(event.strng)	
 
 
@@ -1016,6 +1017,9 @@ def RemoveEvent(event):
 	reminder_holder.set(x)
 
 	if event.importance == "Very Important":
+
+		if os.path.isfile('veryImportant'):
+			os.remove('veryImportant')
 	
 		veryimportanttasks.remove(event)
 
@@ -1026,6 +1030,8 @@ def RemoveEvent(event):
 			x = x+i.strng+"\n"
 
 		veryimportanttasks_holder.set(x)
+
+		
 
 	elif event.importance == "Important":
 
