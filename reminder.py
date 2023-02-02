@@ -9,9 +9,10 @@ import platform
 import datetime
 from datetime import datetime
 import os
+import pandas as pd
 
 with open('reminder_text_file', 'w') as text:
-	text.write("")	
+	text.write("")
 
 window = tk.Tk()
 window.title("Habitude")
@@ -942,6 +943,8 @@ def remove_by_name(item_to_remove):
 
 	notimportanttasks_holder.set(x)
 
+veryimportantdf = pd.read_csv('veryImportant')
+veryimportantdf
 
 def AddEvent(event):
 	tasks.append(event)
@@ -958,7 +961,8 @@ def AddEvent(event):
 	if event.importance == "Very Important":
 
 		with open('veryImportant', 'a') as text:
-			text.write(event.strng)	
+			#text.write('title,month,day,hour,minute')
+			text.write(str(event.title)+","+str(event.month)+","+str(event.day)+","+str(event.hour)+","+str(event.minute))
 
 		veryimportanttasks.append(event)
 
