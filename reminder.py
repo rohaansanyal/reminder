@@ -943,8 +943,16 @@ def remove_by_name(item_to_remove):
 
 	notimportanttasks_holder.set(x)
 
-veryimportantdf = pd.read_csv('veryImportant')
-veryimportantdf
+if os.path.getsize('veryImportant') != 0:
+
+	veryimportantdf = pd.read_csv('veryImportant')
+	print(veryimportantdf)
+
+else:
+
+	veryimportantdf = pd.DataFrame()
+	print("empty df")
+
 
 def AddEvent(event):
 	tasks.append(event)
@@ -962,7 +970,7 @@ def AddEvent(event):
 
 		with open('veryImportant', 'a') as text:
 			#text.write('title,month,day,hour,minute')
-			text.write(str(event.title)+","+str(event.month)+","+str(event.day)+","+str(event.hour)+","+str(event.minute))
+			text.write("\n"+str(event.title)+","+str(event.month)+","+str(event.day)+","+str(event.hour)+","+str(event.minute))
 
 		veryimportanttasks.append(event)
 
