@@ -10,6 +10,7 @@ import datetime
 from datetime import datetime
 import os
 import pandas as pd
+import csv
 
 with open('reminder_text_file', 'w') as text:
 	text.write("")
@@ -943,16 +944,22 @@ def remove_by_name(item_to_remove):
 
 	notimportanttasks_holder.set(x)
 
-if os.path.getsize('veryImportant') != 0:
+#if os.path.getsize('veryImportant') != 0:
 
-	veryimportantdf = pd.read_csv('veryImportant')
-	print(veryimportantdf)
+#	veryimportantdf = pd.read_csv('veryImportant')
+#	print(veryimportantdf)
 
-else:
+#else:
 
-	veryimportantdf = pd.DataFrame()
-	print("empty df")
+#	veryimportantdf = pd.DataFrame()
+#	print("empty df")
 
+categories = ['name', 'month', 'day', 'hour', 'minute']
+
+with open('veryimportant.csv', 'w') as csvfile:
+
+	csvwriter = csv.writer(csvfile)
+	csvwriter.writerow(categories)
 
 def AddEvent(event):
 	tasks.append(event)
@@ -964,13 +971,12 @@ def AddEvent(event):
 
 	reminder_holder.set(x)
 
-	#tasks_shown.append(str(event.importance)+" "+str(event.title)+" - "+ str(event.month)+" "+str(event.day)+" • "+str(event.hour)+":"+str(event.minute)+"\n"+str(event.desc)+"\n"+str(event.countdown))
-
 	if event.importance == "Very Important":
 
-		with open('veryImportant', 'a') as text:
-			#text.write('title,month,day,hour,minute')
-			text.write("\n"+str(event.title)+","+str(event.month)+","+str(event.day)+","+str(event.hour)+","+str(event.minute))
+		with open('veryimportant.csv', 'a') as csvfile:
+			
+			csvwriter = csv.writer(csvfile)
+			csvwriter.writerow([event.title, event.month, event.day, event.hour, event.minute])
 
 		veryimportanttasks.append(event)
 
