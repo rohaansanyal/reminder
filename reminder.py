@@ -11,6 +11,7 @@ from datetime import datetime
 import os
 import pandas as pd
 import csv
+import atexit
 
 with open('reminder_text_file', 'w') as text:
 	text.write("")
@@ -956,10 +957,29 @@ def remove_by_name(item_to_remove):
 
 categories = ['name', 'month', 'day', 'hour', 'minute']
 
-with open('veryimportant.csv', 'w') as csvfile:
+if os.path.exists(str(os.getcwd()).replace('/reminder.py', '/veryimporant.csv')):
 
-	csvwriter = csv.writer(csvfile)
-	csvwriter.writerow(categories)
+	pass
+
+else:
+
+	with open('veryimportant.csv', 'w') as csvfile:
+
+		csvwriter = csv.writer(csvfile)
+		csvwriter.writerow(categories)
+
+veryimportantdf = pd.read_csv('veryimportant.csv')
+
+def ExitFunction(arg):
+
+	with open('veryimportant.csv', 'w') as csvfile:
+
+		csvwriter = csv.writer(csvfile)
+		veryimportantdf.to_csv('veryimportant.csv', mode='w', index=False, header=True)
+
+	print(arg)
+
+atexit.register(ExitFunction, 'Program closed.')
 
 def AddEvent(event):
 	tasks.append(event)
@@ -972,11 +992,9 @@ def AddEvent(event):
 	reminder_holder.set(x)
 
 	if event.importance == "Very Important":
-
-		with open('veryimportant.csv', 'a') as csvfile:
 			
-			csvwriter = csv.writer(csvfile)
-			csvwriter.writerow([event.title, event.month, event.day, event.hour, event.minute])
+		veryimportantdf.loc[len(veryimportantdf.index)] = [event.title, event.month, event.day, event.hour, event.minute]
+		print(veryimportantdf)
 
 		veryimportanttasks.append(event)
 
