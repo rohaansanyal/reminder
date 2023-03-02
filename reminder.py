@@ -12,6 +12,7 @@ import os
 import pandas as pd
 import csv
 import atexit
+from pathlib import Path
 
 with open('reminder_text_file', 'w') as text:
 	text.write("")
@@ -957,11 +958,19 @@ def remove_by_name(item_to_remove):
 
 categories = ['name', 'month', 'day', 'hour', 'minute']
 
-if os.path.exists(str(os.getcwd()).replace('/reminder.py', '/veryimporant.csv')):
+path = Path(os.getcwd() + "/veryimportant.csv")
+print(path)
+
+print(os.path.isfile(path))
+
+if os.path.isfile(path) == True:
 
 	pass
+	print('passed')
 
 else:
+
+	print('opened veryimportant.csv')
 
 	with open('veryimportant.csv', 'w') as csvfile:
 
@@ -972,10 +981,10 @@ veryimportantdf = pd.read_csv('veryimportant.csv')
 
 def ExitFunction(arg):
 
-	with open('veryimportant.csv', 'w') as csvfile:
+	with open('veryimportant.csv', 'a') as csvfile:
 
 		csvwriter = csv.writer(csvfile)
-		veryimportantdf.to_csv('veryimportant.csv', mode='w', index=False, header=True)
+		veryimportantdf.to_csv('veryimportant.csv', mode='a', index=False, header=True)
 
 	print(arg)
 
