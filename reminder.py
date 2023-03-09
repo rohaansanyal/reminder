@@ -14,9 +14,6 @@ import csv
 import atexit
 from pathlib import Path
 
-with open('reminder_text_file', 'w') as text:
-	text.write("")
-
 window = tk.Tk()
 window.title("Habitude")
 screen_width=window.winfo_screenwidth()
@@ -862,15 +859,6 @@ def remove_by_name(item_to_remove):
 
 	x=""
 
-	
-	#for i in tasks_shown:
-#
-#		if item_to_remove in i:
-
-#			tasks_shown.remove(i)
-	
-
-#      -----------TASKS-------------
 	for i in tasks:
 
 		event_title = i.title
@@ -888,9 +876,6 @@ def remove_by_name(item_to_remove):
 
 	reminder_holder.set(x)
 
-
-
-#   ------------VeryImporant--------------
 	for i in veryimportanttasks:
 
 		event_title = i.title
@@ -909,8 +894,6 @@ def remove_by_name(item_to_remove):
 	
 	veryimportanttasks_holder.set(x)
 
-#--------------Imporant---------------
-
 	for i in importanttasks:
 
 		event_title = i.title
@@ -928,8 +911,6 @@ def remove_by_name(item_to_remove):
 
 	importanttasks_holder.set(x)
 
-#-----------------NotImporant------------
-
 	for i in notimportanttasks:
 
 		event_title = i.title
@@ -946,16 +927,6 @@ def remove_by_name(item_to_remove):
 
 	notimportanttasks_holder.set(x)
 
-#if os.path.getsize('veryImportant') != 0:
-
-#	veryimportantdf = pd.read_csv('veryImportant')
-#	print(veryimportantdf)
-
-#else:
-
-#	veryimportantdf = pd.DataFrame()
-#	print("empty df")
-
 categories = ['name', 'month', 'day', 'hour', 'minute']
 
 path = Path(os.getcwd() + "/veryimportant.csv")
@@ -963,79 +934,60 @@ path = Path(os.getcwd() + "/veryimportant.csv")
 if os.path.isfile(path) == True:
 
 	pass
-	print('passed')
 
 else:
-
-	print('opened veryimportant.csv')
 
 	with open('veryimportant.csv', 'w') as csvfile:
 
-		csvwriter = csv.writer(csvfile)
-		csvwriter.writerow(categories)
-
-veryimportantdf = pd.read_csv('veryimportant.csv')
+		vi_csvwriter = csv.writer(csvfile)
+		vi_csvwriter.writerow(categories)
 
 path = Path(os.getcwd() + "/important.csv")
-print(path)
-
-print(os.path.isfile(path))
 
 if os.path.isfile(path) == True:
 
 	pass
-	print('passed')
 
 else:
-
-	print('opened important.csv')
 
 	with open('important.csv', 'w') as csvfile:
 
-		csvwriter = csv.writer(csvfile)
-		csvwriter.writerow(categories)
-
-importantdf = pd.read_csv('important.csv')
+		i_csvwriter = csv.writer(csvfile)
+		i_csvwriter.writerow(categories)
 
 path = Path(os.getcwd() + "/notimportant.csv")
-print(path)
-
-print(os.path.isfile(path))
 
 if os.path.isfile(path) == True:
 
 	pass
-	print('passed')
 
 else:
 
-	print('opened notimportant.csv')
-
 	with open('notimportant.csv', 'w') as csvfile:
 
-		csvwriter = csv.writer(csvfile)
-		csvwriter.writerow(categories)
+		ni_csvwriter = csv.writer(csvfile)
+		ni_csvwriter.writerow(categories)	
 
+veryimportantdf = pd.read_csv('veryimportant.csv')
+importantdf = pd.read_csv('important.csv')
 notimportantdf = pd.read_csv('notimportant.csv')
-
-
 
 
 def ExitFunction(arg):
 
-	with open('veryimportant.csv', 'a') as csvfile:
+	with open('veryimportant.csv', 'w') as csvfile:
 
 		csvwriter = csv.writer(csvfile)
-		veryimportantdf.to_csv('veryimportant.csv', mode='a', index=False, header=True)
+		veryimportantdf.to_csv('veryimportant.csv', mode='w', index=False, header=True)
 
-	with open('important.csv', 'a') as csvfile:
+	with open('important.csv', 'w') as csvfile:
 
 		csvwriter = csv.writer(csvfile)
-		importantdf.to_csv('important.csv', mode='a', index=False, header=True)
+		importantdf.to_csv('important.csv', mode='w', index=False, header=True)
 
-	with open('notimportant.csv', 'a') as csvfile:
+	with open('notimportant.csv', 'w') as csvfile:
 		csvwriter = csv.writer(csvfile)
-		notimportantdf.to_csv('notimportant.csv', mode='a', index=False, header=True)
+		notimportantdf.to_csv('notimportant.csv', mode='w', index=False, header=True)
 
 	print(arg)
 
@@ -1054,8 +1006,6 @@ def AddEvent(event):
 	if event.importance == "Very Important":
 			
 		veryimportantdf.loc[len(veryimportantdf.index)] = [event.title, event.month, event.day, event.hour, event.minute]
-		print(veryimportantdf)
-
 		veryimportanttasks.append(event)
 
 		x = ""
