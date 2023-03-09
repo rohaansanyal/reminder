@@ -959,9 +959,6 @@ def remove_by_name(item_to_remove):
 categories = ['name', 'month', 'day', 'hour', 'minute']
 
 path = Path(os.getcwd() + "/veryimportant.csv")
-print(path)
-
-print(os.path.isfile(path))
 
 if os.path.isfile(path) == True:
 
@@ -979,12 +976,66 @@ else:
 
 veryimportantdf = pd.read_csv('veryimportant.csv')
 
+path = Path(os.getcwd() + "/important.csv")
+print(path)
+
+print(os.path.isfile(path))
+
+if os.path.isfile(path) == True:
+
+	pass
+	print('passed')
+
+else:
+
+	print('opened important.csv')
+
+	with open('important.csv', 'w') as csvfile:
+
+		csvwriter = csv.writer(csvfile)
+		csvwriter.writerow(categories)
+
+importantdf = pd.read_csv('important.csv')
+
+path = Path(os.getcwd() + "/notimportant.csv")
+print(path)
+
+print(os.path.isfile(path))
+
+if os.path.isfile(path) == True:
+
+	pass
+	print('passed')
+
+else:
+
+	print('opened notimportant.csv')
+
+	with open('notimportant.csv', 'w') as csvfile:
+
+		csvwriter = csv.writer(csvfile)
+		csvwriter.writerow(categories)
+
+notimportantdf = pd.read_csv('notimportant.csv')
+
+
+
+
 def ExitFunction(arg):
 
 	with open('veryimportant.csv', 'a') as csvfile:
 
 		csvwriter = csv.writer(csvfile)
 		veryimportantdf.to_csv('veryimportant.csv', mode='a', index=False, header=True)
+
+	with open('important.csv', 'a') as csvfile:
+
+		csvwriter = csv.writer(csvfile)
+		importantdf.to_csv('important.csv', mode='a', index=False, header=True)
+
+	with open('notimportant.csv', 'a') as csvfile:
+		csvwriter = csv.writer(csvfile)
+		notimportantdf.to_csv('notimportant.csv', mode='a', index=False, header=True)
 
 	print(arg)
 
@@ -1017,10 +1068,7 @@ def AddEvent(event):
 
 	elif event.importance == "Important":
 
-		with open('important', 'a') as text:
-			text.write(event.strng)	
-
-
+		importantdf.loc[len(importantdf.index)] = [event.title, event.month, event.day, event.hour, event.minute]
 		importanttasks.append(event)
 
 		x = ""
@@ -1033,10 +1081,7 @@ def AddEvent(event):
 
 	elif event.importance == "Not Important":
 
-		with open('notImportant', 'a') as text:
-			text.write(event.strng)	
-
-
+		notimportantdf.loc[len(notimportantdf.index)] = [event.title, event.month, event.day, event.hour, event.minute]
 		notimportanttasks.append(event)
 
 		x = ""
