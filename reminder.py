@@ -927,7 +927,59 @@ def remove_by_name(item_to_remove):
 
 	notimportanttasks_holder.set(x)
 
-categories = ['name', 'month', 'day', 'hour', 'minute']
+
+def AddEvent(event):
+	tasks.append(event)
+	x = ""
+
+	for i in tasks:
+
+		x = x+i.strng+"\n"
+
+	reminder_holder.set(x)
+
+	if event.importance == "Very Important":
+			
+		veryimportantdf.loc[len(veryimportantdf.index)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
+		veryimportanttasks.append(event)
+
+		x = ""
+
+		for i in veryimportanttasks:
+
+			x = x+i.strng+"\n"
+
+		veryimportanttasks_holder.set(x)
+
+	elif event.importance == "Important":
+
+		importantdf.loc[len(importantdf.index)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
+		importanttasks.append(event)
+
+		x = ""
+
+		for i in importanttasks:
+
+			x = x+i.strng+"\n"
+
+		importanttasks_holder.set(x)
+
+	elif event.importance == "Not Important":
+
+		notimportantdf.loc[len(notimportantdf.index)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
+		notimportanttasks.append(event)
+
+		x = ""
+
+		for i in notimportanttasks:
+
+			x = x+i.strng+"\n"
+
+		notimportanttasks_holder.set(x)
+
+	x=""
+
+categories = ['name', 'desc', 'month', 'day', 'hour', 'minute']
 
 path = Path(os.getcwd() + "/veryimportant.csv")
 
@@ -972,6 +1024,27 @@ veryimportantdf = pd.read_csv('veryimportant.csv')
 importantdf = pd.read_csv('important.csv')
 notimportantdf = pd.read_csv('notimportant.csv')
 
+print(veryimportantdf)
+print(importantdf)
+print(notimportantdf)
+
+if veryimportantdf.empty == False:
+
+	for col, row in veryimportantdf.iterrows():
+
+		AddEvent(Assignment(row['name'], row['desc'], 'Very Important', str(row['month']), str(row['day']), str(row['hour']), str(row['minute']), ''))
+
+if importantdf.empty == False:
+
+	for col, row in importantdf.iterrows():
+
+		AddEvent(Assignment(row['name'], row['desc'], 'Important', str(row['month']), str(row['day']), str(row['hour']), str(row['minute']), ''))
+
+if notimportantdf.empty == False:
+
+	for col, row in notimportantdf.iterrows():
+
+		AddEvent(Assignment(row['name'], row['desc'], 'Not Important', str(row['month']), str(row['day']), str(row['hour']), str(row['minute']), ''))
 
 def ExitFunction(arg):
 
@@ -992,58 +1065,6 @@ def ExitFunction(arg):
 	print(arg)
 
 atexit.register(ExitFunction, 'Program closed.')
-
-def AddEvent(event):
-	tasks.append(event)
-	x = ""
-
-	for i in tasks:
-
-		x = x+i.strng+"\n"
-
-	reminder_holder.set(x)
-
-	if event.importance == "Very Important":
-			
-		veryimportantdf.loc[len(veryimportantdf.index)] = [event.title, event.month, event.day, event.hour, event.minute]
-		veryimportanttasks.append(event)
-
-		x = ""
-
-		for i in veryimportanttasks:
-
-			x = x+i.strng+"\n"
-
-		veryimportanttasks_holder.set(x)
-
-	elif event.importance == "Important":
-
-		importantdf.loc[len(importantdf.index)] = [event.title, event.month, event.day, event.hour, event.minute]
-		importanttasks.append(event)
-
-		x = ""
-
-		for i in importanttasks:
-
-			x = x+i.strng+"\n"
-
-		importanttasks_holder.set(x)
-
-	elif event.importance == "Not Important":
-
-		notimportantdf.loc[len(notimportantdf.index)] = [event.title, event.month, event.day, event.hour, event.minute]
-		notimportanttasks.append(event)
-
-		x = ""
-
-		for i in notimportanttasks:
-
-			x = x+i.strng+"\n"
-
-		notimportanttasks_holder.set(x)
-
-	x=""
-
 
 
 def RemoveEvent(event):
