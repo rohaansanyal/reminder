@@ -1046,6 +1046,14 @@ if notimportantdf.empty == False:
 
 		AddEvent(Assignment(row['name'], row['desc'], 'Not Important', str(row['month']), str(row['day']), str(row['hour']), str(row['minute']), ''))
 
+
+with open('veryimportant.csv', 'w') as csvfile:
+
+	csvwriter = csv.writer(csvfile)
+	#for i in len('veryimportant.csv'): -----------------------------------------------to clear file-------------------------------------------------not work
+	#	csvwriter.drop(i)
+
+
 def ExitFunction(arg):
 
 	with open('veryimportant.csv', 'w') as csvfile:
