@@ -1102,7 +1102,11 @@ def RemoveEvent(event):
 
 		veryimportanttasks_holder.set(x)
 
+		print(veryimportantdf.loc[veryimportantdf['name'] == event.title].index)
+
 		veryimportantdf.drop(veryimportantdf.loc[veryimportantdf['name'] == event.title].index)
+
+
 
 		
 
@@ -1143,7 +1147,30 @@ def RemoveEvent(event):
 
 def remove_event_button():
 
-	remove_by_name(str(completed.get()))
+	eventToRemove = ""
+	for event in veryimportanttasks:
+
+		event_title = event.title
+
+		if str(completed.get()) == event_title:
+
+			eventToRemove = event
+	for event in importanttasks:
+
+		event_title = event.title
+
+		if str(completed.get()) == event_title:
+
+			eventToRemove = event
+	for event in notimportanttasks:
+
+		event_title = event.title
+
+		if str(completed.get()) == event_title:
+
+			eventToRemove = event
+
+	RemoveEvent(eventToRemove)
 
 remove = tk.Button(window, text="Remove", command=remove_event_button, fg="white", bg="sienna1")
 remove.place(x=(placement_unit_x*7.5), y=(placement_unit_y*7))
