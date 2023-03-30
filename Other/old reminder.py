@@ -825,6 +825,87 @@ def selection_sort(unsorted, n):
 
 	return(sortedlst)
 
+def remove_by_name(item_to_remove):
+
+	x=""
+
+	for i in tasks:
+
+		event_title = i.title
+
+		if item_to_remove == event_title:
+
+			tasks.remove(i)
+			#print("task delete")
+
+	x=""
+
+	for i in tasks:
+
+		x = x+i.strng+"\n" 
+
+	reminder_holder.set(x)
+
+	for i in veryimportanttasks:
+
+		event_title = i.title
+
+		if item_to_remove == event_title:
+
+			veryimportanttasks.remove(i)
+			#print("verimportnat delete")
+
+	x=""
+
+	for i in veryimportanttasks:
+
+		x = x+i.strng+"\n" 
+
+	veryimportantdf.drop(veryimportantdf.loc[veryimportantdf['name'] == item_to_remove].index)
+
+	
+	veryimportanttasks_holder.set(x)
+
+	for i in importanttasks:
+
+		event_title = i.title
+
+		if item_to_remove == event_title:
+
+			importanttasks.remove(i)
+			#print("imporatn delete")
+
+	x=""
+
+	for i in importanttasks:
+
+		x = x+i.strng+"\n" 
+
+	importanttasks_holder.set(x)
+
+	importantdf.drop(importantdf.loc[importantdf['name'] == item_to_remove].index)
+
+	for i in notimportanttasks:
+
+		event_title = i.title
+
+		if item_to_remove == event_title:
+
+			notimportanttasks.remove(i)
+
+	x=""
+
+	for i in notimportanttasks:
+
+		x = x+i.strng+"\n" 
+
+	notimportanttasks_holder.set(x)
+
+	notimportantdf.drop(notimportantdf.loc[notimportantdf['name'] == item_to_remove].index)
+
+	print(veryimportantdf)
+	print(importantdf)
+	print(notimportantdf)
 
 def AddEvent(event):
 	tasks.append(event)
@@ -838,7 +919,7 @@ def AddEvent(event):
 
 	if event.importance == "Very Important":
 			
-		#veryimportantdf.loc[len(veryimportantdf)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
+		veryimportantdf.loc[len(veryimportantdf)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
 		veryimportanttasks.append(event)
 
 		x = ""
@@ -851,7 +932,7 @@ def AddEvent(event):
 
 	elif event.importance == "Important":
 
-		#importantdf.loc[len(importantdf)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
+		importantdf.loc[len(importantdf)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
 		importanttasks.append(event)
 
 		x = ""
@@ -864,7 +945,7 @@ def AddEvent(event):
 
 	elif event.importance == "Not Important":
 
-		#notimportantdf.loc[len(notimportantdf)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
+		notimportantdf.loc[len(notimportantdf)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
 		notimportanttasks.append(event)
 
 		x = ""
@@ -954,21 +1035,9 @@ with open('veryimportant.csv', 'w') as csvfile:
 
 def ExitFunction(arg):
 
-	for event in veryimportanttasks:
-
-		veryimportantdf.concat([event.title, event.desc, event.month, event.day, event.hour, event.minute])
-
-	for event in importanttasks:
-
-		importantdf.concat([event.title, event.desc, event.month, event.day, event.hour, event.minute])
-
-	for event in notimportanttasks:
-
-		notimportantdf.concat([event.title, event.desc, event.month, event.day, event.hour, event.minute])
-
 	print(veryimportantdf)
-
 	with open('veryimportant.csv', 'w') as csvfile:
+
 
 		csvwriter = csv.writer(csvfile)
 		veryimportantdf.to_csv('veryimportant.csv', mode='w', index=False, header=True)
@@ -1043,11 +1112,11 @@ def RemoveEvent(event):
 
 	x=""
 
-#print("tasks")
-#for i in tasks:
-#	print(i.title)
-#print("very important df")
-#print(veryimportantdf)
+print("tasks")
+for i in tasks:
+	print(i.title)
+print("very important df")
+print(veryimportantdf)
 
 def remove_event_button():
 
