@@ -1052,16 +1052,22 @@ if notimportantdf.empty == False:
 		AddEvent(Assignment(row['name'], row['desc'], 'Not Important', str(row['month']), str(row['day']), str(row['hour']), str(row['minute']), ''))
 
 
-with open('veryimportant.csv', 'w') as csvfile:
 
-	csvwriter = csv.writer(csvfile)
+
+#with open('veryimportant.csv', 'w') as csvfile:
+
+	
+	#csvwriter = csv.writer(csvfile)
+	#csvfile.truncate()
 	#for i in len('veryimportant.csv'): -----------------------------------------------to clear file-------------------------------------------------not work
 	#	csvwriter.drop(i)
 
 
 def ExitFunction(arg):
 
+	print(veryimportantdf)
 	with open('veryimportant.csv', 'w') as csvfile:
+
 
 		csvwriter = csv.writer(csvfile)
 		veryimportantdf.to_csv('veryimportant.csv', mode='w', index=False, header=True)
@@ -1104,11 +1110,7 @@ def RemoveEvent(event):
 
 		print(veryimportantdf.loc[veryimportantdf['name'] == event.title].index)
 
-		veryimportantdf.drop(veryimportantdf.loc[veryimportantdf['name'] == event.title].index)
-
-
-
-		
+		veryimportantdf.drop([1])
 
 	elif event.importance == "Important":
 
@@ -1149,6 +1151,8 @@ def remove_event_button():
 
 	eventToRemove = ""
 	for event in veryimportanttasks:
+
+		veryimportantdf.drop(veryimportantdf.loc[veryimportantdf['name'] == event.title].index)
 
 		event_title = event.title
 
