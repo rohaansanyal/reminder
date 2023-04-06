@@ -883,7 +883,7 @@ path = Path(os.getcwd() + "/veryimportant.csv")
 
 if os.path.isfile(path) == True:
 
-	print("found veryimportant.csv")
+	pass
 
 else:
 
@@ -922,6 +922,9 @@ veryimportantdf = pd.read_csv('veryimportant.csv')
 importantdf = pd.read_csv('important.csv')
 notimportantdf = pd.read_csv('notimportant.csv')
 
+print("initial reading of veryimportantdf")
+print(veryimportantdf)
+
 if veryimportantdf.empty == False:
 
 	for col, row in veryimportantdf.iterrows():
@@ -940,38 +943,45 @@ if notimportantdf.empty == False:
 
 		AddEvent(Assignment(row['name'], row['desc'], 'Not Important', str(row['month']), str(row['day']), str(row['hour']), str(row['minute']), ''))
 
+veryimportantdf = veryimportantdf[0:0]
+importantdf = importantdf[0:0]
+notimportantdf = notimportantdf[0:0]
 
-
-
-with open('veryimportant.csv', 'w') as csvfile:
+#with open('veryimportant.csv', 'w') as csvfile:
 
 	
-	csvwriter = csv.writer(csvfile)
-	csvfile.truncate()
+	#csvwriter = csv.writer(csvfile)
+	#csvfile.truncate()
 	#for i in len('veryimportant.csv'): -----------------------------------------------to clear file-------------------------------------------------not work
 	#	csvwriter.drop(i)
 
 
 def ExitFunction(arg):
 
+
 	for event in veryimportanttasks:
 
-		veryimportantdf.concat([event.title, event.desc, event.month, event.day, event.hour, event.minute])
+		veryimportantdf.loc[len(veryimportantdf.index)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
 
 	for event in importanttasks:
 
-		importantdf.concat([event.title, event.desc, event.month, event.day, event.hour, event.minute])
+		importantdf.loc[len(importantdf.index)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
 
 	for event in notimportanttasks:
 
-		notimportantdf.concat([event.title, event.desc, event.month, event.day, event.hour, event.minute])
+		notimportantdf.loc[len(notimportantdf.index)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
 
+	#veryimportantdf.drop_duplicates()
+	#importantdf.drop_duplicates()
+	#notimportantdf.drop_duplicates()
+
+	print("\nfinal reading of veryimportantdf")
 	print(veryimportantdf)
 
 	with open('veryimportant.csv', 'w') as csvfile:
 
 		csvwriter = csv.writer(csvfile)
-		veryimportantdf.to_csv('veryimportant.csv', mode='w', index=False, header=True)
+		veryimportantdf.to_csv('veryimportant.csv', mode='w', index=False, header=True) 
 
 	with open('important.csv', 'w') as csvfile:
 
@@ -979,6 +989,7 @@ def ExitFunction(arg):
 		importantdf.to_csv('important.csv', mode='w', index=False, header=True)
 
 	with open('notimportant.csv', 'w') as csvfile:
+
 		csvwriter = csv.writer(csvfile)
 		notimportantdf.to_csv('notimportant.csv', mode='w', index=False, header=True)
 
@@ -1009,7 +1020,7 @@ def RemoveEvent(event):
 
 		veryimportanttasks_holder.set(x)
 
-		veryimportantdf.drop(veryimportantdf.loc[veryimportantdf['name'] == event.title].index)
+		#veryimportantdf.drop(veryimportantdf.loc[veryimportantdf['name'] == event.title].index)
 
 		#veryimportantdf.drop([1])
 
@@ -1025,7 +1036,7 @@ def RemoveEvent(event):
 
 		importanttasks_holder.set(x)
 
-		importantdf.drop(importantdf.loc[importantdf['name'] == event.title].index)
+		#importantdf.drop(importantdf.loc[importantdf['name'] == event.title].index)
 
 	elif event.importance == "Not Important":
 
@@ -1039,7 +1050,7 @@ def RemoveEvent(event):
 
 		notimportanttasks_holder.set(x)
 
-		notimportantdf.drop(notimportantdf.loc[notimportantdf['name'] == event.title].index)
+		#notimportantdf.drop(notimportantdf.loc[notimportantdf['name'] == event.title].index)
 
 	x=""
 
@@ -1054,7 +1065,7 @@ def remove_event_button():
 	eventToRemove = ""
 	for event in veryimportanttasks:
 
-		veryimportantdf.drop(veryimportantdf.loc[veryimportantdf['name'] == event.title].index)
+		#veryimportantdf.drop(veryimportantdf.loc[veryimportantdf['name'] == event.title].index)
 
 		event_title = event.title
 
@@ -1081,10 +1092,56 @@ def remove_event_button():
 remove = tk.Button(window, text="Remove", command=remove_event_button, fg="white", bg="sienna1")
 remove.place(x=(placement_unit_x*7.5), y=(placement_unit_y*7))
 
-#print(window.winfo_width()/2)
+def tasksclear(lst):
 
-#tasks_made=tk.Label(window, textvariable=reminder_holder,fg="white", bg="grey60") ------------------------------------------------------- task made
-#tasks_made.place(x=(placement_unit_x*12), y=(placement_unit_y*1.5))
+	if lst == "very important":
+
+		veryimportanttasks = []
+
+		x = ""
+
+		for i in veryimportanttasks:
+
+			x = x+i.strng+"\n"
+
+		veryimportanttasks_holder.set(x)
+
+	elif lst == "important":
+
+		importanttasks = []
+
+		x = ""
+
+		for i in importanttasks:
+
+			x = x+i.strng+"\n"
+
+		importanttasks_holder.set(x)
+
+	elif lst == "not important":
+
+		notimportanttasks = []
+
+		x = ""
+
+		for i in notimportanttasks:
+
+			x = x+i.strng+"\n"
+
+		notimportanttasks_holder.set(x)
+
+def veryimportantclear():
+
+	tasksclear("very important")
+
+def importantclear():
+
+	tasksclear("important")
+
+def notimportantclear():
+
+	tasksclear("not important")
+
 tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_veryimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
 
@@ -1093,6 +1150,15 @@ tasks_made_imortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7.5))
 
 tasks_made_notimortant=tk.Label(window, textvariable=notimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_notimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12.5))
+
+clearveryimportant = tk.Button(window, text="Clear", command=veryimportantclear)
+clearveryimportant.place(x=(placement_unit_x*10.8), y=(placement_unit_y*2.5))
+
+clearimportant = tk.Button(window, text="Clear", command=importantclear)
+clearimportant.place(x=(placement_unit_x*10.8), y=(placement_unit_y*7.5))
+
+clearnotimportant = tk.Button(window, text="Clear", command=notimportantclear)
+clearnotimportant.place(x=(placement_unit_x*10.8), y=(placement_unit_y*12.5))
 
 
 
