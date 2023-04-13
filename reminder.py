@@ -29,12 +29,15 @@ window_height=window.winfo_height()
 placement_unit_x = window.winfo_screenwidth()/20
 placement_unit_y = window.winfo_screenheight()/20
 
+TimeMonth=time.strftime("%B")#current time of the day in a certin form to check the task
+TimeDay=time.strftime("%d")
+TimeHour=time.strftime("%H")
+TimeMinute=time.strftime("%M")
+CurrentTime = time.strftime("%y:%m:%d:%H:%M")
+datetimeCurrent = datetime.strptime(CurrentTime, "%y:%m:%d:%H:%M")
 
 banner = tk.Label(window, text=" "*1000, fg="white", bg="grey60")
 banner.place(x=(0),y=(0))
-
-#habitude = tk.Label(window, text="Habitude", fg="white", bg="grey60")
-#habitude.place(x=(window_width/2),y=(0))
 
 months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -83,15 +86,6 @@ selected_importance.set(important[0])
 dropdown_list_importance = tk.OptionMenu(window, selected_importance, *important)
 dropdown_list_importance.place(x=(placement_unit_x*2.5), y=(placement_unit_y*7))
 
-'''
-am_and_pm = ["AM", "PM"]
-
-selected_am_or_pm = tk.StringVar(window)
-selected_am_or_pm.set(am_and_pm[0])
-
-am_or_pm = tk.OptionMenu(window, selected_am_or_pm, *am_and_pm)
-am_or_pm.place(x=(placement_unit_x*2.5), y=(placement_unit_y*8))
-'''
 hours = range(1, 25)
 
 selected_hour = tk.StringVar(window)
@@ -132,18 +126,6 @@ to_remove = []
 entry_completed = tk.Entry(window, text=completed)
 entry_completed.place(x=(placement_unit_x*7.5), y=(placement_unit_y*8))
 
-#confirm = tk.Button(window, text="Enter", command=reminder_confirm, fg="white", bg="sienna1")
-
-#descript = tk.StringVar(window, "Description")
-
-#description = tk.Text(window, x=placement_unit_x*5, y=placement_unit_y, width=20, height=4, wrap = WORD, padx = 10, pady = 10)
-#description.pack(fill=None, expand=False)
-#description.place(x=placement_unit_x*5, y=placement_unit_y, width=350, height=70, wrap = WORD, padx = 10, pady = 10)
-
-
-#current_time=tk.Label(window, textvariable=datetime.now(),fg="black", bg="grey60")
-#current_time.place(x=200, y=1000)
-
 clockTime = tk.Label(window, text=" ", bg="sienna1")
 clockTime.place(x=(window_width/2), y=0)
 
@@ -160,6 +142,16 @@ def set_current_date():
 	selected_hour.set(time.strftime("%H"))
 	selected_minutes.set(time.strftime("%M"))
 
+def set_for_five():
+	x = datetime.strptime(time.strftime("%y:%m:%d:%H:%M"), "%y:%m:%d:%H:%M") + timedelta(minutes= 5)
+
+	selected_day.set(x.strftime("%d"))
+	selected_month.set(x.strftime("%B"))
+	selected_hour.set(x.strftime("%H"))
+	selected_minutes.set(x.strftime("%M"))
+	#make it so that when task made it doesn't ask if task is done because it is done in 5
+	
+
 def notify(time, title): 
 
 	if time == '0 minutes':
@@ -175,6 +167,10 @@ def notify(time, title):
 
 current_date = tk.Button(window, text="Set Current Time", command=set_current_date, fg="white", bg="sienna1")
 current_date.place(x=(placement_unit_x*7.5), y=(placement_unit_y*1.5))
+
+inFive = tk.Button(window, text="Set For 5 Minutes", command=set_for_five, fg="black", bg="sienna1", highlightbackground="azure2")
+inFive.place(x=(placement_unit_x*6.3), y=(placement_unit_y*2.59))
+
 
 settingslabel_banner = tk.Label(window, text=" "*404, bg="sienna1", font=("IBM Plex Sans Light", 25))
 settingslabel_banner.place(x=0, y=0)
@@ -201,15 +197,8 @@ descadded = False
 desctext = ""
 descstr = ""
 
-#leap year
 
 month_ends = {"January":31, "February":28, "March":31, "April":30, "May":31, "June":30, "July":31, "August":31, "September":30, "October":31, "November":30, "December":31}
-'''
-if selected_am_or_pm.get() == "PM":
-
-	curr_time = time.strftime("%B %d • %h:%M")
-	selected_hour = selected_hour + 12
-'''
 
 def clockChange():
 	currentTimeMilitary=time.strftime("%B %d • %H:%M")
@@ -253,7 +242,6 @@ def tick():
 			selected_month_number=months.index(a)+1
 
 
-	#"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
 
 	#~~~~~~~~~~~~~~~~~~~~~~ updating positions ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -267,8 +255,6 @@ def tick():
 	daylabel.place(x=(placement_unit_x*4.5), y=(placement_unit_y*3.8))
 
 	dropdown_list_importance.place(x=(placement_unit_x*0.45), y=(placement_unit_y*8.5))
-
-	#am_or_pm.place(x=(placement_unit_x*0.5), y=(placement_unit_y*9.5))
 
 	dropdown_list_hour.place(x=(placement_unit_x*0.45), y=(placement_unit_y*6.5))
 	hours.place(x=(placement_unit_x*0.5), y=(placement_unit_y*5.8))
@@ -475,15 +461,12 @@ def tick():
 				minuntilevent = int(event.minute) - int(TimeMinute)
 			else:
 				minuntilevent = (60 - int(TimeMinute))+int(event.minute)
-				#print(minuntilevent)
-				#print(TimeHour)
+
 				hoursuntilevent=hoursuntilevent-1
 
 
 		
-		
-		#print("hours until event: " + str(hoursuntilevent))
-		#print("minutes until event: " + str(minuntilevent))
+	
 
 		if TimeDay == event.day and TimeMonth == event.month:
 
@@ -516,8 +499,8 @@ def tick():
 
 		
 		
-		#print("hours until event: " + str(hoursuntilevent))
-		#print("minutes until event: " + str(minuntilevent))
+		
+		
 
 		if TimeDay == event.day and TimeMonth == event.month:
 
@@ -549,8 +532,8 @@ def tick():
 
 		
 		
-		#print("hours until event: " + str(hoursuntilevent))
-		#print("minutes until event: " + str(minuntilevent))
+		
+		
 
 		if TimeDay == event.day and TimeMonth == event.month:
 
@@ -583,8 +566,8 @@ def tick():
 
 		
 		
-		#print("hours until event: " + str(hoursuntilevent))
-		#print("minutes until event: " + str(minuntilevent))
+		
+		
 
 		if TimeDay == event.day and TimeMonth == event.month:
 
@@ -665,22 +648,7 @@ def tick():
 				j.minute = (j.datetime).strftime("%M")
 
 				
-				'''
-				hoursuntilevent=hoursuntilevent+1
-				tempj = j
-				RemoveEvent(j)
-
-				if int(TimeMinute) >= int(60-int(addtime.get())) and int(TimeMinute) <= 59:
-
-					tempj.minute = str(int(tempj.minute) + int(addtime.get()) - 60)
-					tempj.hour = str(int(tempj.hour))
-
-				else:
-					
-					tempj.minute = str(int(tempj.minute) + int(addtime.get()))
 				
-				AddEvent(tempj)
-				'''
 
 
 	for j in importanttasks:
@@ -838,7 +806,7 @@ def AddEvent(event):
 
 	if event.importance == "Very Important":
 			
-		#veryimportantdf.loc[len(veryimportantdf)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
+		
 		veryimportanttasks.append(event)
 
 		x = ""
@@ -851,7 +819,7 @@ def AddEvent(event):
 
 	elif event.importance == "Important":
 
-		#importantdf.loc[len(importantdf)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
+		
 		importanttasks.append(event)
 
 		x = ""
@@ -864,7 +832,7 @@ def AddEvent(event):
 
 	elif event.importance == "Not Important":
 
-		#notimportantdf.loc[len(notimportantdf)] = [event.title, event.desc, event.month, event.day, event.hour, event.minute]
+		
 		notimportanttasks.append(event)
 
 		x = ""
@@ -1096,39 +1064,23 @@ def tasksclear(lst):
 
 	if lst == "very important":
 
-		veryimportanttasks = []
+		print("clearing")
 
-		x = ""
+		veryimportanttasks.clear()
 
-		for i in veryimportanttasks:
-
-			x = x+i.strng+"\n"
-
-		veryimportanttasks_holder.set(x)
+		veryimportanttasks_holder.set("")
 
 	elif lst == "important":
 
-		importanttasks = []
+		importanttasks.clear()
 
-		x = ""
-
-		for i in importanttasks:
-
-			x = x+i.strng+"\n"
-
-		importanttasks_holder.set(x)
+		importanttasks_holder.set("")
 
 	elif lst == "not important":
 
-		notimportanttasks = []
+		notimportanttasks.clear()
 
-		x = ""
-
-		for i in notimportanttasks:
-
-			x = x+i.strng+"\n"
-
-		notimportanttasks_holder.set(x)
+		notimportanttasks_holder.set("")
 
 def veryimportantclear():
 
@@ -1142,6 +1094,9 @@ def notimportantclear():
 
 	tasksclear("not important")
 
+
+tasks_title_veryimportant=tk.Label
+
 tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_veryimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
 
@@ -1151,14 +1106,23 @@ tasks_made_imortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7.5))
 tasks_made_notimortant=tk.Label(window, textvariable=notimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_notimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12.5))
 
-clearveryimportant = tk.Button(window, text="Clear", command=veryimportantclear)
-clearveryimportant.place(x=(placement_unit_x*10.8), y=(placement_unit_y*2.5))
+tasks_title_veryimportant=tk.Label(window, text = "Very Important Tasks",fg="white", bg="grey60", wraplength=900)
+tasks_title_veryimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2))
 
-clearimportant = tk.Button(window, text="Clear", command=importantclear)
-clearimportant.place(x=(placement_unit_x*10.8), y=(placement_unit_y*7.5))
+tasks_title_important=tk.Label(window, text = "Important Tasks",fg="white", bg="grey60", wraplength=900)
+tasks_title_important.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7))
 
-clearnotimportant = tk.Button(window, text="Clear", command=notimportantclear)
-clearnotimportant.place(x=(placement_unit_x*10.8), y=(placement_unit_y*12.5))
+tasks_title_notimportant=tk.Label(window, text = "Not Important Tasks",fg="white", bg="grey60", wraplength=900)
+tasks_title_notimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12))
+
+clearveryimportant = tk.Button(window, text="Clear", command=veryimportantclear, fg="white", bg="sienna1")
+clearveryimportant.place(x=(placement_unit_x*11.5), y=(placement_unit_y*2))
+
+clearimportant = tk.Button(window, text="Clear", command=importantclear, fg="white", bg="sienna1")
+clearimportant.place(x=(placement_unit_x*11.5), y=(placement_unit_y*7))
+
+clearnotimportant = tk.Button(window, text="Clear", command=notimportantclear, fg="white", bg="sienna1")
+clearnotimportant.place(x=(placement_unit_x*11.5), y=(placement_unit_y*12))
 
 
 
