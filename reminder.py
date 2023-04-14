@@ -14,16 +14,16 @@ import csv
 import atexit
 from pathlib import Path
 
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+
 window = tk.Tk()
 window.title("Habitude")
-screen_width=window.winfo_screenwidth()
-screen_height=window.winfo_screenheight()
 window.option_add('*Font', '1')
-window.geometry(str(screen_width) + "x" + str(screen_height))
 device_os = str(platform.system())
 
-description = "Test"
-
+screen_width=window.winfo_screenwidth()
+screen_height=window.winfo_screenheight()
+window.geometry(str(screen_width) + "x" + str(screen_height))
 window_width=window.winfo_width()
 window_height=window.winfo_height()
 placement_unit_x = window.winfo_screenwidth()/20
@@ -36,8 +36,9 @@ TimeMinute=time.strftime("%M")
 CurrentTime = time.strftime("%y:%m:%d:%H:%M")
 datetimeCurrent = datetime.strptime(CurrentTime, "%y:%m:%d:%H:%M")
 
-banner = tk.Label(window, text=" "*1000, fg="white", bg="grey60")
-banner.place(x=(0),y=(0))
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+
+description = "Test"
 
 months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -49,75 +50,86 @@ veryimportanttasks = []
 importanttasks = []
 notimportanttasks = []
 
+noFiveMinCheck = False
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+
+banner = tk.Label(window, text=" "*1000, fg="white", bg="grey60")#top orange line withe the time
+banner.place(x=(0),y=(0))
+
+
+title = tk.StringVar(window, "Title")
+entry_title = tk.Entry(window, text=title)
+entry_title.place(x=placement_unit_x*1.5, y=placement_unit_y)
+
+
 selected_month = tk.StringVar(window)
 selected_month.set(months[0])
-
 dropdown_list_month = tk.OptionMenu(window, selected_month, *months)
 dropdown_list_month.place(x=(placement_unit_x*1), y=(placement_unit_y*3))
-
-night_day = ["Light", "Dark"]
-
-selected_theme = tk.StringVar(window)
-selected_theme.set(night_day[0])
-
-dropdown_night_day = tk.OptionMenu(window, selected_theme, *night_day)
-dropdown_night_day.place(x=placement_unit_x*1, y=placement_unit_y*18)
-
 monthlabel = tk.Label(window, text="Month", fg="white", bg="grey60")
 monthlabel.place(x=placement_unit_x*2.5, y=placement_unit_y*2.5)
 
+
 days = range(1, 32)
 days = [str(i).zfill(2) for i in days]
-
 selected_day = tk.StringVar(window)
 selected_day.set(days[0])
-
 dropdown_list_day = tk.OptionMenu(window, selected_day, *days)
 dropdown_list_day.place(x=(placement_unit_x*7.5), y=(placement_unit_y*3))
-
 daylabel = tk.Label(window, text="Day", fg="white", bg="grey60")
 daylabel.place(x=(placement_unit_x*7.5), y=(placement_unit_y*2.5))
 
-important = ["Very Important", "Important", "Not Important"]
-
-selected_importance = tk.StringVar(window)
-selected_importance.set(important[0]) 
-
-dropdown_list_importance = tk.OptionMenu(window, selected_importance, *important)
-dropdown_list_importance.place(x=(placement_unit_x*2.5), y=(placement_unit_y*7))
 
 hours = range(1, 25)
-
 selected_hour = tk.StringVar(window)
 selected_hour.set(hours[0])
-
 dropdown_list_hour = tk.OptionMenu(window, selected_hour, *hours)
 dropdown_list_hour.place(x=(placement_unit_x*2.5), y=(placement_unit_y*5.5))
-
 hours = tk.Label(window, text="Hours", fg="white", bg="grey60")
 hours.place(x=(placement_unit_x*2.5), y=(placement_unit_y*5))
 
+
 minutes = range(0, 60)
 minutes = [str(i).zfill(2) for i in minutes]
-
 selected_minutes = tk.StringVar(window)
 selected_minutes.set(minutes[0])
-
 dropdown_list_minutes = tk.OptionMenu(window, selected_minutes, *minutes)
 dropdown_list_minutes.place(x=(placement_unit_x*7.5), y=(placement_unit_y*5.5))
+minuteslabel = tk.Label(window, text="Minutes", fg="white", bg="grey60")
+minuteslabel.place(x=(placement_unit_x*7.5), y=(placement_unit_y*5))
 
-minutes = tk.Label(window, text="Minutes", fg="white", bg="grey60")
-minutes.place(x=(placement_unit_x*7.5), y=(placement_unit_y*5))
+
+important = ["Very Important", "Important", "Not Important"]
+selected_importance = tk.StringVar(window)
+selected_importance.set(important[0]) 
+dropdown_list_importance = tk.OptionMenu(window, selected_importance, *important)
+dropdown_list_importance.place(x=(placement_unit_x*2.5), y=(placement_unit_y*7))
+
+
+night_day = ["Light", "Dark"]
+selected_theme = tk.StringVar(window)
+selected_theme.set(night_day[0])
+dropdown_night_day = tk.OptionMenu(window, selected_theme, *night_day)
+dropdown_night_day.place(x=placement_unit_x*1, y=placement_unit_y*18)
+
+
+
+
+
+clockTime = tk.Label(window, text=" ", bg="sienna1")
+clockTime.place(x=(window_width/2), y=0)
+
+
+
 
 reminder_holder = tk.StringVar(window, "")
 veryimportanttasks_holder = tk.StringVar(window, "")
 importanttasks_holder = tk.StringVar(window, "")
 notimportanttasks_holder = tk.StringVar(window, "")
 
-title = tk.StringVar(window, "Title")
 
-entry_title = tk.Entry(window, text=title)
-entry_title.place(x=placement_unit_x*1.5, y=placement_unit_y)
+
 
 completed = tk.StringVar(window, "Event to Remove")
 
@@ -126,8 +138,6 @@ to_remove = []
 entry_completed = tk.Entry(window, text=completed)
 entry_completed.place(x=(placement_unit_x*7.5), y=(placement_unit_y*8))
 
-clockTime = tk.Label(window, text=" ", bg="sienna1")
-clockTime.place(x=(window_width/2), y=0)
 
 addtime = tk.StringVar(window, "10")
 not_completed_addtime = tk.Entry(window, text=addtime)
@@ -142,6 +152,7 @@ def set_current_date():
 	selected_hour.set(time.strftime("%H"))
 	selected_minutes.set(time.strftime("%M"))
 
+
 def set_for_five():
 	x = datetime.strptime(time.strftime("%y:%m:%d:%H:%M"), "%y:%m:%d:%H:%M") + timedelta(minutes= 5)
 
@@ -149,6 +160,9 @@ def set_for_five():
 	selected_month.set(x.strftime("%B"))
 	selected_hour.set(x.strftime("%H"))
 	selected_minutes.set(x.strftime("%M"))
+
+	noFiveMinCheck = True
+
 	#make it so that when task made it doesn't ask if task is done because it is done in 5
 	
 
@@ -213,7 +227,7 @@ def notificationReminder():
 
 
 
-def tick():
+def tick():	
 
 	global tasks_shown
 	global tasks
@@ -260,7 +274,7 @@ def tick():
 	hours.place(x=(placement_unit_x*0.5), y=(placement_unit_y*5.8))
 
 	dropdown_list_minutes.place(x=(placement_unit_x*4.5), y=(placement_unit_y*6.5))
-	minutes.place(x=(placement_unit_x*4.55), y=(placement_unit_y*5.8))
+	minuteslabel.place(x=(placement_unit_x*4.55), y=(placement_unit_y*5.8))
 
 	entry_title.place(x=placement_unit_x*0.5, y=placement_unit_y*2.5) #y based off of this, used to be 1.5
 
@@ -805,10 +819,10 @@ def AddEvent(event):
 	reminder_holder.set(x)
 
 	if event.importance == "Very Important":
-			
-		
+
 		veryimportanttasks.append(event)
 
+		
 		x = ""
 
 		for i in veryimportanttasks:
@@ -821,6 +835,7 @@ def AddEvent(event):
 
 		
 		importanttasks.append(event)
+
 
 		x = ""
 
@@ -925,6 +940,7 @@ notimportantdf = notimportantdf[0:0]
 
 
 def ExitFunction(arg):
+
 
 
 	for event in veryimportanttasks:
@@ -1134,7 +1150,25 @@ def reminder_confirm():
 
 	
 
-	for event in tasks:
+	for event in veryimportanttasks:
+
+		event_title = event.title
+
+		if title.get() == event_title:
+
+			unique_title = False
+			messagebox.showerror(title="Invalid Title", message="Your title needs to be unique and not the same as a different one.")
+
+	for event in importanttasks:
+
+		event_title = event.title
+
+		if title.get() == event_title:
+
+			unique_title = False
+			messagebox.showerror(title="Invalid Title", message="Your title needs to be unique and not the same as a different one.")
+
+	for event in notimportanttasks:
 
 		event_title = event.title
 
