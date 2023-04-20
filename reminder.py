@@ -212,6 +212,26 @@ desctext = ""
 descstr = ""
 
 
+tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
+tasks_made_veryimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
+
+tasks_made_imortant=tk.Label(window, textvariable=importanttasks_holder,fg="white", bg="grey60", wraplength=900)
+tasks_made_imortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7.5))
+
+tasks_made_notimortant=tk.Label(window, textvariable=notimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
+tasks_made_notimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12.5))
+
+tasks_title_veryimportant=tk.Label(window, text = "Very Important Tasks",fg="white", bg="grey60", wraplength=900)
+tasks_title_veryimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2))
+
+tasks_title_important=tk.Label(window, text = "Important Tasks",fg="white", bg="grey60", wraplength=900)
+tasks_title_important.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7))
+
+tasks_title_notimportant=tk.Label(window, text = "Not Important Tasks",fg="white", bg="grey60", wraplength=900)
+tasks_title_notimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12))
+
+
+
 month_ends = {"January":31, "February":28, "March":31, "April":30, "May":31, "June":30, "July":31, "August":31, "September":30, "October":31, "November":30, "December":31}
 
 def clockChange():
@@ -304,6 +324,23 @@ def tick():
 	taskslabel.place(x=(window_width/2), y=placement_unit_y*0.9)
 	tasksbg.place(x=window_width/2, y=placement_unit_y*0.9)
 
+	tasks_made_veryimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
+	tasks_made_imortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7.5))
+	tasks_made_notimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12.5))
+
+	tasks_title_veryimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2))
+	tasks_title_important.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7))
+	tasks_title_notimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12))
+
+	inFive.place(x=(placement_unit_x*6.8), y=(placement_unit_y*2.59))
+
+	clearnotimportant.place(x=(placement_unit_x*12.2), y=(placement_unit_y*12))
+	clearveryimportant.place(x=(placement_unit_x*12.2), y=(placement_unit_y*2))
+	clearimportant.place(x=(placement_unit_x*11.8), y=(placement_unit_y*7))
+
+	snoozeLabel.place(x=(placement_unit_x*0.5), y =(placement_unit_y*16.6))
+	not_completed_addtime.place(x=(placement_unit_x*2.5), y=(placement_unit_y*16.5))
+
 	#~~~~~~~~~~~~~~~~~~~~~~ window dimensions refresher ~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -353,6 +390,16 @@ def tick():
 			tasksbg.config(bg="snow3")
 			createeventbanner.config(bg="sienna1")
 			settingslabel_banner.config(bg="sienna1")
+			tasks_made_veryimortant.config(bg="grey60")
+			tasks_made_imortant.config(bg="grey60")
+			tasks_made_notimortant.config(bg="grey60")
+			clearveryimportant.config(highlightbackground="snow3")
+			clearveryimportant.config(fg="black")
+			clearimportant.config(highlightbackground="snow3")
+			clearimportant.config(fg="black")
+			clearnotimportant.config(highlightbackground="snow3")
+			clearnotimportant.config(fg="black")
+
 
 	if selected_theme.get() == "Dark":
 
@@ -629,6 +676,16 @@ def tick():
 				RemoveEvent(j)
 
 			j.tenMinuteCheck = True
+
+		if (j.datetime - datetimeCurrent).total_seconds() == 300 and j.fiveMinuteCheck == False:
+
+			answer = notify('5 minutes', j.title)
+
+			if answer == "yes":
+				
+				RemoveEvent(j)
+
+			j.fiveMinuteCheck = True
 
 		if (j.datetime - datetimeCurrent).total_seconds() == 60 and j.oneMinuteCheck == False:
 
@@ -1110,36 +1167,14 @@ def notimportantclear():
 
 	tasksclear("not important")
 
-
-tasks_title_veryimportant=tk.Label
-
-tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
-tasks_made_veryimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
-
-tasks_made_imortant=tk.Label(window, textvariable=importanttasks_holder,fg="white", bg="grey60", wraplength=900)
-tasks_made_imortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7.5))
-
-tasks_made_notimortant=tk.Label(window, textvariable=notimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
-tasks_made_notimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12.5))
-
-tasks_title_veryimportant=tk.Label(window, text = "Very Important Tasks",fg="white", bg="grey60", wraplength=900)
-tasks_title_veryimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2))
-
-tasks_title_important=tk.Label(window, text = "Important Tasks",fg="white", bg="grey60", wraplength=900)
-tasks_title_important.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7))
-
-tasks_title_notimportant=tk.Label(window, text = "Not Important Tasks",fg="white", bg="grey60", wraplength=900)
-tasks_title_notimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12))
+clearnotimportant = tk.Button(window, text="Clear", command=notimportantclear, fg="white", bg="sienna1")
+clearnotimportant.place(x=(placement_unit_x*11.5), y=(placement_unit_y*12))
 
 clearveryimportant = tk.Button(window, text="Clear", command=veryimportantclear, fg="white", bg="sienna1")
 clearveryimportant.place(x=(placement_unit_x*11.5), y=(placement_unit_y*2))
 
 clearimportant = tk.Button(window, text="Clear", command=importantclear, fg="white", bg="sienna1")
 clearimportant.place(x=(placement_unit_x*11.5), y=(placement_unit_y*7))
-
-clearnotimportant = tk.Button(window, text="Clear", command=notimportantclear, fg="white", bg="sienna1")
-clearnotimportant.place(x=(placement_unit_x*11.5), y=(placement_unit_y*12))
-
 
 
 def reminder_confirm():
@@ -1216,6 +1251,15 @@ def reminder_confirm():
 
 		if (tempvar.datetime - datetimeCurrent) == 600:
 			tempvar.tenMinuteCheck=True
+
+		elif (tempvar.datetime - datetimeCurrent) == 60:
+			tempvar.oneMinuteCheck = True
+
+		elif (tempvar.datetime - datetimeCurrent) == 300:
+			tempvar.fiveMinuteCheck = True
+
+		elif (tempvar.datetime - datetimeCurrent) == 1800:
+			tempvar.thirtyMinuteCheck = True
 
 		AddEvent(tempvar)
 
