@@ -620,15 +620,15 @@ def tick():
 			j.thirtyMinuteCheck = True
 
 
-		if (j.datetime - datetimeCurrent).total_seconds() == 300 and j.fiveMinuteCheck == False:
+		if (j.datetime - datetimeCurrent).total_seconds() == 600 and j.tenMinuteCheck == False:
 
-			answer = notify('5 minutes', j.title)
+			answer = notify('10 minutes', j.title)
 
 			if answer == "yes":
 				
 				RemoveEvent(j)
 
-			j.fiveMinuteCheck = True
+			j.tenMinuteCheck = True
 
 		if (j.datetime - datetimeCurrent).total_seconds() == 60 and j.oneMinuteCheck == False:
 
@@ -679,15 +679,15 @@ def tick():
 
 			j.thirtyMinuteCheck = True
 
-		if (j.datetime - datetimeCurrent).total_seconds() == 300 and j.fiveMinuteCheck == False:
+		if (j.datetime - datetimeCurrent).total_seconds() == 600 and j.tenMinuteCheck == False:
 
-			answer = notify('5 minutes', j.title)
+			answer = notify('10 minutes', j.title)
 
 			if answer == "yes":
 				
 				RemoveEvent(j)
 
-			j.fiveMinuteCheck = True	
+			j.tenMinuteCheck = True	
 
 		if (j.datetime - datetimeCurrent).total_seconds() == 60 and j.oneMinuteCheck == False:
 
@@ -724,15 +724,15 @@ def tick():
 
 		secondsaway = (j.datetime - datetimeCurrent).total_seconds()
 
-		if (j.datetime - datetimeCurrent).total_seconds() == 60 and j.oneMinuteCheck == False:
+		if (j.datetime - datetimeCurrent).total_seconds() == 600 and j.tenMinuteCheck == False:
 
-			answer = notify('1 minute', j.title)
+			answer = notify('10 minute', j.title)
 
 			if answer == "yes":
 				
 				RemoveEvent(j)
 
-			j.oneMinuteCheck = True
+			j.tenMinuteCheck = True
 
 		if secondsaway == 0:
 
@@ -1208,9 +1208,15 @@ def reminder_confirm():
 		messagebox.showerror(title="Invalid Alarm", message="Your alarm needs to be set at a date that has not passed yet.")
 
 
+
+
 	if unique_title == True and correct_time==True:
 
 		tempvar = Assignment(title.get(), descstr, selected_importance.get(), selected_month.get(), selected_day.get(), selected_hour.get(), selected_minutes.get(), "") 
+
+		if (tempvar.datetime - datetimeCurrent) == 600:
+			tempvar.tenMinuteCheck=True
+
 		AddEvent(tempvar)
 
 	x=""
