@@ -1183,6 +1183,7 @@ def reminder_confirm():
 
 	correct_time = False
 
+	title_length = False
 	
 
 	for event in veryimportanttasks:
@@ -1243,23 +1244,36 @@ def reminder_confirm():
 		messagebox.showerror(title="Invalid Alarm", message="Your alarm needs to be set at a date that has not passed yet.")
 
 
+	if len(str(title.get()))<=40:
+		title_length = True 
+	else:
+		messagebox.showerror(title="Passed Character Limit", message="Your title should be 40 characters or less.")
 
 
-	if unique_title == True and correct_time==True:
+
+
+	if unique_title == True and correct_time==True and title_length==True:
 
 		tempvar = Assignment(title.get(), descstr, selected_importance.get(), selected_month.get(), selected_day.get(), selected_hour.get(), selected_minutes.get(), "") 
 
-		if (tempvar.datetime - datetimeCurrent) == 600:
-			tempvar.tenMinuteCheck=True
+		print(tempvar.datetime - datetimeCurrent)
 
-		elif (tempvar.datetime - datetimeCurrent) == 60:
+
+		if (tempvar.datetime - datetimeCurrent).total_seconds() == 60:
 			tempvar.oneMinuteCheck = True
 
-		elif (tempvar.datetime - datetimeCurrent) == 300:
+		elif (tempvar.datetime - datetimeCurrent).total_seconds() == 300:
 			tempvar.fiveMinuteCheck = True
+			print("fivemincheck is true5")
 
-		elif (tempvar.datetime - datetimeCurrent) == 1800:
+		elif (tempvar.datetime - datetimeCurrent).total_seconds() == 600:
+			tempvar.tenMinuteCheck=True
+
+		elif (tempvar.datetime - datetimeCurrent).total_seconds() == 1800:
 			tempvar.thirtyMinuteCheck = True
+
+		elif (tempvar.datetime - datetimeCurrent).total_seconds() == 3600:
+			tempvar.oneHourCheck = True
 
 		AddEvent(tempvar)
 
