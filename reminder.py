@@ -883,8 +883,10 @@ def AddEvent(event):
 
 	reminder_holder.set(x)
 
+	'''
+
 	if (event.datetime - datetimeCurrent).total_seconds() == 60:
-			event.oneMinuteCheck = True
+		event.oneMinuteCheck = True
 
 	elif (event.datetime - datetimeCurrent).total_seconds() == 300:
 		event.fiveMinuteCheck = True
@@ -898,6 +900,9 @@ def AddEvent(event):
 	elif (event.datetime - datetimeCurrent).total_seconds() == 3600:
 		event.oneHourCheck = True
 
+
+	'''
+	
 	if event.importance == "Very Important":
 
 		veryimportanttasks.append(event)
@@ -1283,14 +1288,14 @@ def reminder_confirm():
 
 		tempvar = Assignment(title.get(), descstr, selected_importance.get(), selected_month.get(), selected_day.get(), selected_hour.get(), selected_minutes.get(), "") 
 
-		print(tempvar.datetime - datetimeCurrent)
+		
 
-		"""
 		if (tempvar.datetime - datetimeCurrent).total_seconds() == 60:
 			tempvar.oneMinuteCheck = True
 
 		elif (tempvar.datetime - datetimeCurrent).total_seconds() == 300:
 			tempvar.fiveMinuteCheck = True
+			print("changed 5 check to true")
 
 		elif (tempvar.datetime - datetimeCurrent).total_seconds() == 600:
 			tempvar.tenMinuteCheck=True
@@ -1300,9 +1305,11 @@ def reminder_confirm():
 
 		elif (tempvar.datetime - datetimeCurrent).total_seconds() == 3600:
 			tempvar.oneHourCheck = True
-		"""
+		
 
 		AddEvent(tempvar)
+
+		tempvar = ""
 
 	x=""
 
