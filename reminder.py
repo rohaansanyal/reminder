@@ -212,7 +212,7 @@ desctext = ""
 descstr = ""
 
 
-tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
+tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60", wrap=900)
 tasks_made_veryimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
 
 tasks_made_imortant=tk.Label(window, textvariable=importanttasks_holder,fg="white", bg="grey60", wraplength=900)
@@ -352,18 +352,24 @@ def tick():
 			window.configure(bg="azure2")
 			clockTime.config(bg="sienna1")
 			banner.config(bg="sienna1")
-			dropdown_list_month.config(bg="azure2")
 			dropdown_night_day.config(bg="azure2")
+			dropdown_night_day.config(fg="black")
 			dropdown_list_month.config(bg="azure2")
+			dropdown_list_month.config(fg="black")
 			dropdown_list_minutes.config(bg="azure2")
+			dropdown_list_minutes.config(fg="black")
 			dropdown_list_hour.config(bg="azure2")
+			dropdown_list_hour.config(fg="black")
 			dropdown_list_importance.config(bg="azure2")
+			dropdown_list_importance.config(fg="black")
 			dropdown_list_day.config(bg="azure2")
+			dropdown_list_day.config(fg="black")
 			#am_or_pm.config(bg="azure2")
 			entry_title.config(highlightbackground = "azure2")
 			entry_title.config(bg = "azure3")
 			entry_title.config(bd = 1.5)
 			entry_title.config(relief="ridge")
+			entry_title.config(fg="black")
 			descbutton.config(highlightbackground="azure2")
 			descbutton.config(fg="black")
 			current_date.config(fg="black")
@@ -376,10 +382,12 @@ def tick():
 			entry_completed.config(bg = "azure3")
 			entry_completed.config(bd = 1.5)
 			entry_completed.config(relief="ridge")
+			entry_completed.config(fg="black")
 			not_completed_addtime.config(highlightbackground = "azure2")
 			not_completed_addtime.config(bg = "azure3")
 			not_completed_addtime.config(bd = 1.5)
 			not_completed_addtime.config(relief="ridge")
+			not_completed_addtime.config(fg="black")
 			settingslabel.config(bg="sienna1")
 			settingslabel.config(fg="black")
 			createeventlabel.config(bg="sienna1")
@@ -875,6 +883,21 @@ def AddEvent(event):
 
 	reminder_holder.set(x)
 
+	if (event.datetime - datetimeCurrent).total_seconds() == 60:
+			event.oneMinuteCheck = True
+
+	elif (event.datetime - datetimeCurrent).total_seconds() == 300:
+		event.fiveMinuteCheck = True
+
+	elif (event.datetime - datetimeCurrent).total_seconds() == 600:
+		event.tenMinuteCheck=True
+
+	elif (event.datetime - datetimeCurrent).total_seconds() == 1800:
+		event.thirtyMinuteCheck = True
+
+	elif (event.datetime - datetimeCurrent).total_seconds() == 3600:
+		event.oneHourCheck = True
+
 	if event.importance == "Very Important":
 
 		veryimportanttasks.append(event)
@@ -961,6 +984,10 @@ else:
 veryimportantdf = pd.read_csv('veryimportant.csv')
 importantdf = pd.read_csv('important.csv')
 notimportantdf = pd.read_csv('notimportant.csv')
+
+veryimportantdf = veryimportantdf.fillna(" ")
+importantdf = importantdf.fillna(" ")
+notimportantdf = notimportantdf.fillna(" ")
 
 print("initial reading of veryimportantdf")
 print(veryimportantdf)
@@ -1258,13 +1285,12 @@ def reminder_confirm():
 
 		print(tempvar.datetime - datetimeCurrent)
 
-
+		"""
 		if (tempvar.datetime - datetimeCurrent).total_seconds() == 60:
 			tempvar.oneMinuteCheck = True
 
 		elif (tempvar.datetime - datetimeCurrent).total_seconds() == 300:
 			tempvar.fiveMinuteCheck = True
-			print("fivemincheck is true5")
 
 		elif (tempvar.datetime - datetimeCurrent).total_seconds() == 600:
 			tempvar.tenMinuteCheck=True
@@ -1274,6 +1300,7 @@ def reminder_confirm():
 
 		elif (tempvar.datetime - datetimeCurrent).total_seconds() == 3600:
 			tempvar.oneHourCheck = True
+		"""
 
 		AddEvent(tempvar)
 
