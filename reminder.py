@@ -128,6 +128,8 @@ veryimportanttasks_holder = tk.StringVar(window, "")
 importanttasks_holder = tk.StringVar(window, "")
 notimportanttasks_holder = tk.StringVar(window, "")
 
+topveryimportant_holder = tk.StringVar(window, "")
+
 
 
 
@@ -212,8 +214,10 @@ desctext = ""
 descstr = ""
 
 
-tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60", wrap=900)
+tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_veryimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
+
+veryimportanttaskslabel = tk.Label(window, textvariable=topveryimportant_holder, fg="white", bg="grey60", wraplength=900)
 
 tasks_made_imortant=tk.Label(window, textvariable=importanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_imortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7.5))
@@ -557,12 +561,14 @@ def tick():
 				#print(TimeHour)
 				hoursuntilevent=hoursuntilevent-1
 
-		x=""
-		for i in veryimportanttasks:
+		print(veryimportanttasks[0].strng+"\n"+veryimportanttasks[1].strng+"\n"+veryimportanttasks[2].strng)
 
-			x = x+i.strng+"\n" 
+		if len(veryimportanttasks) != 0:
+			x = veryimportanttasks[0].strng+"\n"+veryimportanttasks[1].strng+"\n"+veryimportanttasks[2].strng
+		elif:
+			x=""
 
-		veryimportanttasks_holder.set(x)
+		topveryimportant_holder.set(x)
 
 
 
@@ -907,14 +913,12 @@ def AddEvent(event):
 
 		veryimportanttasks.append(event)
 
-		
-		x = ""
+		if len(veryimportanttasks) < 3:
+			x = veryimportanttasks[0].strng+"\n"+veryimportanttasks[1].strng+"\n"+veryimportanttasks[2].strng
+		elif:
+			x=""
 
-		for i in veryimportanttasks:
-
-			x = x+i.strng+"\n"
-
-		veryimportanttasks_holder.set(x)
+		topveryimportant_holder.set(x)
 
 	elif event.importance == "Important":
 
@@ -1085,17 +1089,12 @@ def RemoveEvent(event):
 	
 		veryimportanttasks.remove(event)
 
-		x = ""
+		if len(veryimportanttasks) != 0:
+			x = veryimportanttasks[0].strng+"\n"+veryimportanttasks[1].strng+"\n"+veryimportanttasks[2].strng
+		elif:
+			x=""
 
-		for i in veryimportanttasks:
-
-			x = x+i.strng+"\n"
-
-		veryimportanttasks_holder.set(x)
-
-		#veryimportantdf.drop(veryimportantdf.loc[veryimportantdf['name'] == event.title].index)
-
-		#veryimportantdf.drop([1])
+		topveryimportant_holder.set(x)
 
 	elif event.importance == "Important":
 

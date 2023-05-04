@@ -48,3 +48,12 @@ class Assignment():
 		#delta = self.datetime - CurrentTime
 		
 		#self.second = delta.total_seconds()
+
+"""
+		x=""
+		for i in veryimportanttasks:
+
+			x = x+i.strng+"\n"
+
+		veryimportanttasks_holder.set(x)
+"""
