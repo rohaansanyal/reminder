@@ -239,6 +239,32 @@ tasks_title_notimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12
 
 
 
+
+
+l1 = Label(window, text = "First:")
+l2 = Label(window, text = "Second:")
+
+l1.grid(row = 0, column = 0, sticky = W, pady = 2)
+l2.grid(row = 1, column = 0, sticky = W, pady = 2)
+ 
+# entry widgets, used to take entry from user
+e1 = Entry(window)
+e2 = Entry(window)
+ 
+# this will arrange entry widgets
+e1.grid(row = 0, column = 1, pady = 2)
+e2.grid(row = 1, column = 1, pady = 2)
+
+
+
+
+
+
+
+
+
+
+
 month_ends = {"January":31, "February":28, "March":31, "April":30, "May":31, "June":30, "July":31, "August":31, "September":30, "October":31, "November":30, "December":31}
 
 def clockChange():
@@ -341,9 +367,9 @@ def tick():
 
 	inFive.place(x=(placement_unit_x*6.8), y=(placement_unit_y*2.59))
 
-	clearnotimportant.place(x=(placement_unit_x*12.2), y=(placement_unit_y*12))
 	clearveryimportant.place(x=(placement_unit_x*12.2), y=(placement_unit_y*2))
 	clearimportant.place(x=(placement_unit_x*11.8), y=(placement_unit_y*7))
+	clearnotimportant.place(x=(placement_unit_x*12.2), y=(placement_unit_y*12))
 
 	snoozeLabel.place(x=(placement_unit_x*0.5), y =(placement_unit_y*16.6))
 	not_completed_addtime.place(x=(placement_unit_x*2.5), y=(placement_unit_y*16.5))
@@ -1224,6 +1250,7 @@ def notimportantclear():
 
 	tasksclear("not important")
 
+
 clearnotimportant = tk.Button(window, text="Clear", command=notimportantclear, fg="white", bg="sienna1")
 clearnotimportant.place(x=(placement_unit_x*11.5), y=(placement_unit_y*12))
 
@@ -1232,6 +1259,8 @@ clearveryimportant.place(x=(placement_unit_x*11.5), y=(placement_unit_y*2))
 
 clearimportant = tk.Button(window, text="Clear", command=importantclear, fg="white", bg="sienna1")
 clearimportant.place(x=(placement_unit_x*11.5), y=(placement_unit_y*7))
+
+
 
 
 def reminder_confirm():
@@ -1381,10 +1410,51 @@ def description_window():
 		desctext.configure(bg="gray")
 		donebutton.configure(highlightbackground="dark slate gray", fg="black")
 
+def seeMoreFunctionVI():
+	descwindow = tk.Tk()
+	descwindow.title("Very Important Tasks")
+	descwindow.geometry(str(int(screen_width/3.5)) + "x" + str(int(screen_height/3.5)))
+	placement_unit_x = (window.winfo_screenwidth()/3.5)/20
+	placement_unit_y = (window.winfo_screenheight()/3.5)/20
+
+
+def seeMoreFunctionI():
+	descwindow = tk.Tk()
+	descwindow.title("Important Tasks")
+	descwindow.geometry(str(int(screen_width/3.5)) + "x" + str(int(screen_height/3.5)))
+	placement_unit_x = (window.winfo_screenwidth()/3.5)/20
+	placement_unit_y = (window.winfo_screenheight()/3.5)/20
+
+
+def seeMoreFunctionNI():
+	descwindow = tk.Tk()
+	descwindow.title("Not Important Tasks")
+	descwindow.geometry(str(int(screen_width/3.5)) + "x" + str(int(screen_height/3.5)))
+	placement_unit_x = (window.winfo_screenwidth()/3.5)/20
+	placement_unit_y = (window.winfo_screenheight()/3.5)/20
+
+
+
+
+seeMoreVeryImportant = tk.Button(window, text="See More", command=seeMoreFunctionVI, fg="white", bg="sienna1")
+seeMoreVeryImportant.place(x=(placement_unit_x*13), y=(placement_unit_y*2))
+
+seeMoreImportant = tk.Button(window, text="See More", command=seeMoreFunctionI, fg="white", bg="sienna1")
+seeMoreImportant.place(x=(placement_unit_x*13), y=(placement_unit_y*7))
+
+seeMoreNotImportant = tk.Button(window, text="See More", command=seeMoreFunctionNI, fg="white", bg="sienna1")
+seeMoreNotImportant.place(x=(placement_unit_x*13), y=(placement_unit_y*12))
+
+
 
 
 #	description = tk.Text(descwindow, wrap = WORD, padx = 10, pady = 10, width = screen_width/3 - 10, height = screen_height/4 - 10)
 	#description.pack()
+
+
+
+
+
 
 
 confirm = tk.Button(window, text="Enter", command=reminder_confirm, fg="white", bg="sienna1")
