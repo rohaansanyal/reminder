@@ -241,19 +241,7 @@ tasks_title_notimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12
 
 
 
-l1 = Label(window, text = "First:")
-l2 = Label(window, text = "Second:")
 
-l1.grid(row = 0, column = 0, sticky = W, pady = 2)
-l2.grid(row = 1, column = 0, sticky = W, pady = 2)
- 
-# entry widgets, used to take entry from user
-e1 = Entry(window)
-e2 = Entry(window)
- 
-# this will arrange entry widgets
-e1.grid(row = 0, column = 1, pady = 2)
-e2.grid(row = 1, column = 1, pady = 2)
 
 
 
@@ -1410,6 +1398,7 @@ def description_window():
 		desctext.configure(bg="gray")
 		donebutton.configure(highlightbackground="dark slate gray", fg="black")
 
+
 def seeMoreFunctionVI():
 	descwindow = tk.Tk()
 	descwindow.title("Very Important Tasks")
@@ -1417,6 +1406,55 @@ def seeMoreFunctionVI():
 	placement_unit_x = (window.winfo_screenwidth()/3.5)/20
 	placement_unit_y = (window.winfo_screenheight()/3.5)/20
 
+	veryimportantholder1 = tk.StringVar(descwindow)
+	veryimportantholder2 = tk.StringVar(descwindow)
+
+	l1 = Label(descwindow, text = "First:", textvariable=veryimportantholder1)
+	l2 = Label(descwindow, text = "Second:", textvariable=veryimportantholder2)
+
+	l1.grid(row = 0, column = 0, sticky = W, pady = 2)
+	l2.grid(row = 0, column = 1, sticky = W, pady = 2)
+
+	x=""
+	y=""
+
+	for i in range(len(veryimportanttasks)):
+
+		
+
+		if i % 2 == 0 and i != 0:
+
+			l1 = Label(descwindow, text=veryimportanttasks[i].strng)
+			l1.grid(row = i/2, column = 0, sticky = W, pady = 2)
+
+		elif i == 0:
+
+			l1 = Label(descwindow, text=veryimportanttasks[i].strng)
+			l1.grid(row = 1, column = 0, sticky = W, pady = 2)
+
+		elif i % 2 == 1:
+
+			l2 = Label(descwindow, text=veryimportanttasks[i].strng)
+			l1.grid(row = (i/2)-0.5, column = 1, sticky = W, pady = 2)
+
+
+	
+
+	"""
+	l1 = Label(descwindow, text = "First:")
+	l2 = Label(descwindow, text = "Second:")
+
+	l1.grid(row = 0, column = 0, sticky = W, pady = 2)
+	l2.grid(row = 1, column = 0, sticky = W, pady = 2)
+	 
+	# entry widgets, used to take entry from user
+	e1 = Entry(descwindow)
+	e2 = Entry(descwindow)
+	 
+	# this will arrange entry widgets
+	e1.grid(row = 0, column = 1, pady = 2)
+	e2.grid(row = 1, column = 1, pady = 2)
+	"""
 
 def seeMoreFunctionI():
 	descwindow = tk.Tk()
@@ -1426,12 +1464,16 @@ def seeMoreFunctionI():
 	placement_unit_y = (window.winfo_screenheight()/3.5)/20
 
 
+
+
 def seeMoreFunctionNI():
 	descwindow = tk.Tk()
 	descwindow.title("Not Important Tasks")
 	descwindow.geometry(str(int(screen_width/3.5)) + "x" + str(int(screen_height/3.5)))
 	placement_unit_x = (window.winfo_screenwidth()/3.5)/20
 	placement_unit_y = (window.winfo_screenheight()/3.5)/20
+
+	
 
 
 
@@ -1444,6 +1486,8 @@ seeMoreImportant.place(x=(placement_unit_x*13), y=(placement_unit_y*7))
 
 seeMoreNotImportant = tk.Button(window, text="See More", command=seeMoreFunctionNI, fg="white", bg="sienna1")
 seeMoreNotImportant.place(x=(placement_unit_x*13), y=(placement_unit_y*12))
+
+
 
 
 
