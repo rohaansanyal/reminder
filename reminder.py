@@ -1399,7 +1399,12 @@ def description_window():
 		donebutton.configure(highlightbackground="dark slate gray", fg="black")
 
 
+print(1 % 2)
+
 def seeMoreFunctionVI():
+
+
+
 	descwindow = tk.Tk()
 	descwindow.title("Very Important Tasks")
 	descwindow.geometry(str(int(screen_width/3.5)) + "x" + str(int(screen_height/3.5)))
@@ -1420,22 +1425,22 @@ def seeMoreFunctionVI():
 
 	for i in range(len(veryimportanttasks)):
 
-		
-
 		if i % 2 == 0 and i != 0:
 
 			l1 = Label(descwindow, text=veryimportanttasks[i].strng)
-			l1.grid(row = i/2, column = 0, sticky = W, pady = 2)
+			l1.grid(row = int(i/2), column = 0, sticky = W, pady = 2)
 
 		elif i == 0:
 
 			l1 = Label(descwindow, text=veryimportanttasks[i].strng)
-			l1.grid(row = 1, column = 0, sticky = W, pady = 2)
+			l1.grid(row = int(0), column = 0, sticky = W, pady = 2)
 
 		elif i % 2 == 1:
 
 			l2 = Label(descwindow, text=veryimportanttasks[i].strng)
-			l1.grid(row = (i/2)-0.5, column = 1, sticky = W, pady = 2)
+			l2.grid(row = int((i/2)-0.5), column = 1, sticky = W, pady = 2)
+
+
 
 
 	
