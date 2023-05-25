@@ -220,6 +220,12 @@ tasks_made_veryimortant=tk.Label(window, textvariable=topveryimportant_holder, f
 #tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_veryimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
 
+tasks_made_veryimortant2=tk.Label(window, textvariable=topveryimportant_holder, fg="white", bg="grey60", wraplength=900)
+tasks_made_veryimortant2.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
+
+tasks_made_veryimortant3=tk.Label(window, textvariable=topveryimportant_holder, fg="white", bg="grey60", wraplength=900)
+tasks_made_veryimortant3.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
+
 tasks_made_imortant=tk.Label(window, textvariable=topimportant_holder,fg="white", bg="grey60", wraplength=900)
 #tasks_made_imortant=tk.Label(window, textvariable=importanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_imortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7.5))
@@ -239,9 +245,7 @@ tasks_title_notimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12
 
 
 l1 = Label(window)
-l1.place(x=(placement_unit_x*10), y=(placement_unit_y*5))
 l2 = Label(window)
-l2.place(x=(placement_unit_x*12), y=(placement_unit_y*5))
 
 
 l1.grid(row = 0, column = 0, sticky = W, pady = 2)
@@ -391,7 +395,10 @@ def tick():
 	taskslabel.place(x=(window_width/2), y=placement_unit_y*0.9)
 	tasksbg.place(x=window_width/2, y=placement_unit_y*0.9)
 
-	tasks_made_veryimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
+	tasks_made_veryimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.6))
+	tasks_made_veryimortant2.place(x=(placement_unit_x*13.5), y=(placement_unit_y*2.6))
+	tasks_made_veryimortant3.place(x=(placement_unit_x*16.8), y=(placement_unit_y*2.6))
+
 	tasks_made_imortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7.5))
 	tasks_made_notimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12.5))
 
@@ -399,11 +406,15 @@ def tick():
 	tasks_title_important.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7))
 	tasks_title_notimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12))
 
-	inFive.place(x=(placement_unit_x*6.8), y=(placement_unit_y*2.59))
-
-	clearveryimportant.place(x=(placement_unit_x*12.2), y=(placement_unit_y*2))
+	clearveryimportant.place(x=(placement_unit_x*12.2), y=(placement_unit_y*1.8))
 	clearimportant.place(x=(placement_unit_x*11.8), y=(placement_unit_y*7))
-	clearnotimportant.place(x=(placement_unit_x*12.2), y=(placement_unit_y*12))
+	clearnotimportant.place(x=(placement_unit_x*12), y=(placement_unit_y*12))
+
+	seeMoreVeryImportant.place(x=(placement_unit_x*13.2), y=(placement_unit_y*1.8))
+	seeMoreImportant.place(x=(placement_unit_x*12.8), y=(placement_unit_y*7))
+	seeMoreNotImportant.place(x=(placement_unit_x*13), y=(placement_unit_y*12))
+
+	inFive.place(x=(placement_unit_x*6.8), y=(placement_unit_y*2.59))
 
 	snoozeLabel.place(x=(placement_unit_x*0.5), y =(placement_unit_y*16.6))
 	not_completed_addtime.place(x=(placement_unit_x*2.5), y=(placement_unit_y*16.5))
@@ -466,6 +477,8 @@ def tick():
 			createeventbanner.config(bg="sienna1")
 			settingslabel_banner.config(bg="sienna1")
 			tasks_made_veryimortant.config(bg="grey60")
+			tasks_made_veryimortant2.config(bg="grey60")
+			tasks_made_veryimortant3.config(bg="grey60")
 			tasks_made_imortant.config(bg="grey60")
 			tasks_made_notimortant.config(bg="grey60")
 			clearveryimportant.config(highlightbackground="snow3")
@@ -474,54 +487,12 @@ def tick():
 			clearimportant.config(fg="black")
 			clearnotimportant.config(highlightbackground="snow3")
 			clearnotimportant.config(fg="black")
+			seeMoreVeryImportant.config(highlightbackground="snow3", fg="black")
+			seeMoreImportant.config(highlightbackground="snow3", fg="black")
+			seeMoreNotImportant.config(highlightbackground="snow3", fg="black")
 
 
 	if selected_theme.get() == "Dark":
-
-		#if device_os == "Darwin": #macOS operating system name
-
-			"""
-			window.configure(bg="light slate gray")
-			banner.config(bg="deepskyblue3")
-			clockTime.config(bg="deepskyblue3")
-			dropdown_list_month.config(bg="light slate gray")
-			dropdown_night_day.config(bg="light slate gray")
-			dropdown_list_month.config(bg="light slate gray")
-			dropdown_list_minutes.config(bg="light slate gray")
-			dropdown_list_hour.config(bg="light slate gray")
-			dropdown_list_importance.config(bg="light slate gray")
-			dropdown_list_day.config(bg="light slate gray")
-			am_or_pm.config(bg="light slate gray")
-			entry_title.config(highlightbackground = "gray")
-			entry_title.config(bg = "gray")
-			entry_title.config(bd = 1.5)
-			descbutton.config(highlightbackground="light slate gray")
-			descbutton.config(fg="black")
-			current_date.config(highlightbackground="light slate gray")
-			current_date.config(fg="black")
-			confirm.config(highlightbackground="light slate gray")
-			confirm.config(fg="black")
-			entry_completed.config(highlightbackground = "light slate gray")
-			entry_completed.config(bg = "gray")
-			entry_completed.config(bd = 1.5)
-			remove.config(highlightbackground="light slate gray")
-			remove.config(fg="black")
-			not_completed_addtime.config(highlightbackground = "light slate gray")
-			not_completed_addtime.config(bg = "gray")
-			not_completed_addtime.config(bd = 1.5)
-			not_completed_addtime.config(relief="ridge")
-			settingslabel.config(bg="deepskyblue3")
-			settingslabel.config(fg="white")
-			createeventlabel.config(bg="deepskyblue3")
-			createeventlabel.config(fg="white")
-			taskslabel.config(bg="mediumpurple2")
-			taskslabel.config(fg="white")
-			tasksbanner.config(bg="mediumpurple2")
-			createeventbanner.config(bg="deepskyblue3")
-			settingslabel_banner.config(bg="deepskyblue3")
-			tasksbg.config(bg="dark slate gray")
-
-			"""
 
 			window.configure(bg="dark slate gray")
 			banner.config(bg="deepskyblue3")
@@ -563,6 +534,7 @@ def tick():
 			createeventbanner.config(bg="deepskyblue3")
 			settingslabel_banner.config(bg="deepskyblue3")
 			tasksbg.config(bg="light slate gray")
+
 
 
 	x = ""
