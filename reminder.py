@@ -238,6 +238,35 @@ tasks_title_notimportant=tk.Label(window, text = "Not Important Tasks",fg="white
 tasks_title_notimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12))
 
 
+l1 = Label(window)
+l1.place(x=(placement_unit_x*10), y=(placement_unit_y*5))
+l2 = Label(window)
+l2.place(x=(placement_unit_x*12), y=(placement_unit_y*5))
+
+
+l1.grid(row = 0, column = 0, sticky = W, pady = 2)
+l2.grid(row = 0, column = 1, sticky = W, pady = 2)
+
+
+x=""
+y=""
+
+for i in range(len(veryimportanttasks)):
+
+	if i % 2 == 0 and i != 0:
+
+		l1 = Label(window, text=veryimportanttasks[i].strng)
+		l1.grid(row = int(i/2), column = 2, sticky = W, pady = 2)
+
+	elif i == 0:
+
+		l1 = Label(window, text=veryimportanttasks[i].strng)
+		l1.grid(row = int(0), column = 2, sticky = W, pady = 2)
+
+	elif i % 2 == 1:
+
+		l2 = Label(window, text=veryimportanttasks[i].strng)
+		l2.grid(row = int((i/2)-0.5), column = 3, sticky = W, pady = 2)
 
 
 
@@ -296,6 +325,23 @@ def tick():
 		if selected_month.get()==a:
 			selected_month_number=months.index(a)+1
 
+
+	for i in range(len(veryimportanttasks)):
+
+		if i % 2 == 0 and i != 0:
+
+			l1 = Label(window, text=veryimportanttasks[i].strng)
+			l1.grid(row = int(i/2), column = 0, sticky = W, pady = 2)
+
+		elif i == 0:
+
+			l1 = Label(window, text=veryimportanttasks[i].strng)
+			l1.grid(row = int(0), column = 0, sticky = W, pady = 2)
+
+		elif i % 2 == 1:
+
+			l2 = Label(window, text=veryimportanttasks[i].strng)
+			l2.grid(row = int((i/2)-0.5), column = 1, sticky = W, pady = 2)
 
 
 	#~~~~~~~~~~~~~~~~~~~~~~ updating positions ~~~~~~~~~~~~~~~~~~~~~~~
@@ -1400,6 +1446,13 @@ def description_window():
 
 
 print(1 % 2)
+
+
+
+
+
+
+
 
 def seeMoreFunctionVI():
 
