@@ -184,7 +184,7 @@ def notify(time, title):
 
 
 current_date = tk.Button(window, text="Set Current Time", command=set_current_date, fg="white", bg="sienna1")
-current_date.place(x=(placement_unit_x*7.5), y=(placement_unit_y*1.5))
+current_date.place(x=(placement_unit_x*4.9), y=(placement_unit_y*2.59))
 
 inFive = tk.Button(window, text="Set For 5 Minutes", command=set_for_five, fg="black", bg="sienna1", highlightbackground="azure2")
 inFive.place(x=(placement_unit_x*6.3), y=(placement_unit_y*2.59))
@@ -243,6 +243,7 @@ tasks_title_important.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7))
 tasks_title_notimportant=tk.Label(window, text = "Not Important Tasks",fg="white", bg="grey60", wraplength=900)
 tasks_title_notimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12))
 
+"""
 
 l1 = Label(window)
 l2 = Label(window)
@@ -274,7 +275,7 @@ for i in range(len(veryimportanttasks)):
 
 
 
-
+"""
 
 
 
@@ -329,7 +330,7 @@ def tick():
 		if selected_month.get()==a:
 			selected_month_number=months.index(a)+1
 
-
+	"""
 	for i in range(len(veryimportanttasks)):
 
 		if i % 2 == 0 and i != 0:
@@ -346,7 +347,7 @@ def tick():
 
 			l2 = Label(window, text=veryimportanttasks[i].strng)
 			l2.grid(row = int((i/2)-0.5), column = 1, sticky = W, pady = 2)
-
+	"""
 
 	#~~~~~~~~~~~~~~~~~~~~~~ updating positions ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -356,24 +357,22 @@ def tick():
 	dropdown_list_month.place(x=(placement_unit_x*0.45), y=(placement_unit_y*4.5))
 	monthlabel.place(x=placement_unit_x*0.5, y=placement_unit_y*3.8)
 
-	dropdown_list_day.place(x=(placement_unit_x*4.45), y=(placement_unit_y*4.5))
-	daylabel.place(x=(placement_unit_x*4.5), y=(placement_unit_y*3.8))
+	dropdown_list_day.place(x=(placement_unit_x*2.45), y=(placement_unit_y*4.5))
+	daylabel.place(x=(placement_unit_x*2.5), y=(placement_unit_y*3.8))
 
 	dropdown_list_importance.place(x=(placement_unit_x*0.45), y=(placement_unit_y*8.5))
 
 	dropdown_list_hour.place(x=(placement_unit_x*0.45), y=(placement_unit_y*6.5))
 	hours.place(x=(placement_unit_x*0.5), y=(placement_unit_y*5.8))
 
-	dropdown_list_minutes.place(x=(placement_unit_x*4.5), y=(placement_unit_y*6.5))
-	minuteslabel.place(x=(placement_unit_x*4.55), y=(placement_unit_y*5.8))
+	dropdown_list_minutes.place(x=(placement_unit_x*2.4), y=(placement_unit_y*6.5))
+	minuteslabel.place(x=(placement_unit_x*2.45), y=(placement_unit_y*5.8))
 
 	entry_title.place(x=placement_unit_x*0.5, y=placement_unit_y*2.5) #y based off of this, used to be 1.5
 
 	entry_completed.place(x=(placement_unit_x*4.5), y=(placement_unit_y*8.5))
 
 	clockTime.place(x=(window_width/2), y=0)
-
-	current_date.place(x=(placement_unit_x*7.5), y=(placement_unit_y*3))
 
 	remove.place(x=(placement_unit_x*4.45), y=(placement_unit_y*9.5))
 
