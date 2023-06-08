@@ -129,8 +129,20 @@ importanttasks_holder = tk.StringVar(window, "")
 notimportanttasks_holder = tk.StringVar(window, "")
 
 topveryimportant_holder = tk.StringVar(window, "")
+topveryimportant_holder2 = tk.StringVar(window, "")
+topveryimportant_holder3 = tk.StringVar(window, "")
+
+
+
 topimportant_holder = tk.StringVar(window,"")
+topimportant_holder2 = tk.StringVar(window,"")
+topimportant_holder3 = tk.StringVar(window,"")
+
+
+
 topnotimportant_holder = tk.StringVar(window,"")
+topnotimportant_holder2 = tk.StringVar(window,"")
+topnotimportant_holder3 = tk.StringVar(window,"")
 
 
 
@@ -220,19 +232,37 @@ tasks_made_veryimortant=tk.Label(window, textvariable=topveryimportant_holder, f
 #tasks_made_veryimortant=tk.Label(window, textvariable=veryimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_veryimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
 
-tasks_made_veryimortant2=tk.Label(window, textvariable=topveryimportant_holder, fg="white", bg="grey60", wraplength=900)
+tasks_made_veryimortant2=tk.Label(window, textvariable=topveryimportant_holder2, fg="white", bg="grey60", wraplength=900)
 tasks_made_veryimortant2.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
 
-tasks_made_veryimortant3=tk.Label(window, textvariable=topveryimportant_holder, fg="white", bg="grey60", wraplength=900)
+tasks_made_veryimortant3=tk.Label(window, textvariable=topveryimportant_holder3, fg="white", bg="grey60", wraplength=900)
 tasks_made_veryimortant3.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2.5))
 
+
+
+
 tasks_made_imortant=tk.Label(window, textvariable=topimportant_holder,fg="white", bg="grey60", wraplength=900)
-#tasks_made_imortant=tk.Label(window, textvariable=importanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_imortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7.5))
 
+tasks_made_imortant2=tk.Label(window, textvariable=topimportant_holder2,fg="white", bg="grey60", wraplength=900)
+tasks_made_imortant2.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7.5))
+
+tasks_made_imortant3=tk.Label(window, textvariable=topimportant_holder3,fg="white", bg="grey60", wraplength=900)
+tasks_made_imortant3.place(x=(placement_unit_x*10.2), y=(placement_unit_y*7.5))
+
+
+
 tasks_made_notimortant=tk.Label(window, textvariable=topnotimportant_holder,fg="white", bg="grey60", wraplength=900)
-#tasks_made_notimortant=tk.Label(window, textvariable=notimportanttasks_holder,fg="white", bg="grey60", wraplength=900)
 tasks_made_notimortant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12.5))
+
+tasks_made_notimortant2=tk.Label(window, textvariable=topnotimportant_holder2,fg="white", bg="grey60", wraplength=900)
+tasks_made_notimortant2.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12.5))
+
+tasks_made_notimortant3=tk.Label(window, textvariable=topnotimportant_holder3,fg="white", bg="grey60", wraplength=900)
+tasks_made_notimortant3.place(x=(placement_unit_x*10.2), y=(placement_unit_y*12.5))
+
+
+
 
 tasks_title_veryimportant=tk.Label(window, text = "Very Important Tasks",fg="white", bg="grey60", wraplength=900)
 tasks_title_veryimportant.place(x=(placement_unit_x*10.2), y=(placement_unit_y*2))
@@ -399,6 +429,14 @@ def tick():
 	tasks_made_veryimortant2.place(x=(placement_unit_x*10.5), y=(placement_unit_y*2.6))
 	tasks_made_veryimortant3.place(x=(placement_unit_x*13.8), y=(placement_unit_y*2.6))
 
+	tasks_made_imortant.place(x=(placement_unit_x*7.2), y=(placement_unit_y*7.5))
+	tasks_made_imortant2.place(x=(placement_unit_x*10.5), y=(placement_unit_y*7.5))
+	tasks_made_imortant3.place(x=(placement_unit_x*13.8), y=(placement_unit_y*7.5))
+
+	tasks_made_notimortant.place(x=(placement_unit_x*7.2), y=(placement_unit_y*12.5))
+	tasks_made_notimortant2.place(x=(placement_unit_x*10.5), y=(placement_unit_y*12.5))
+	tasks_made_notimortant3.place(x=(placement_unit_x*13.8), y=(placement_unit_y*12.5))
+
 	tasks_made_imortant.place(x=(placement_unit_x*7.2), y=(placement_unit_y*7.6))
 	#place new here
 
@@ -409,13 +447,13 @@ def tick():
 	tasks_title_important.place(x=(placement_unit_x*7.2), y=(placement_unit_y*7))
 	tasks_title_notimportant.place(x=(placement_unit_x*7.2), y=(placement_unit_y*12))
 
-	clearveryimportant.place(x=(placement_unit_x*10.8), y=(placement_unit_y*1.9))
-	clearimportant.place(x=(placement_unit_x*10.5),y=(placement_unit_y*6.9))
+	clearveryimportant.place(x=(placement_unit_x*10.7), y=(placement_unit_y*1.9))
+	clearimportant.place(x=(placement_unit_x*10.7),y=(placement_unit_y*6.9))
 	clearnotimportant.place(x=(placement_unit_x*10.7), y=(placement_unit_y*12))
 
-	seeMoreVeryImportant.place(x=(placement_unit_x*9.3), y=(placement_unit_y*1.9))
+	seeMoreVeryImportant.place(x=(placement_unit_x*9), y=(placement_unit_y*1.9))
 	seeMoreImportant.place(x=(placement_unit_x*9), y=(placement_unit_y*6.9))
-	seeMoreNotImportant.place(x=(placement_unit_x*9.2), y=(placement_unit_y*12))
+	seeMoreNotImportant.place(x=(placement_unit_x*9), y=(placement_unit_y*12))
 
 	snoozeLabel.place(x=(placement_unit_x*0.5), y =(placement_unit_y*16.6))
 	not_completed_addtime.place(x=(placement_unit_x*2.5), y=(placement_unit_y*16.5))
@@ -522,6 +560,20 @@ def tick():
 
 
 
+	#~~~~~~~~~~~~~~~~~~~~~~~3 task code~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	i=0
+	for event in veryimportanttasks:
+		
+		x=event.strng+"\n"
+		if(i==0):
+			topveryimportant_holder.set(x)
+		elif(i==1):
+			topveryimportant_holder2.set(x)
+		elif(i==2):
+			topveryimportant_holder3.set(x)
+			i=(-1)
+		i+=1
+
 	#~~~~~~~~~~~~~~~~~~~~~~~ ordering lists ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	templst = selection_sort(veryimportanttasks,len(veryimportanttasks))
@@ -567,16 +619,7 @@ def tick():
 				#print(TimeHour)
 				hoursuntilevent=hoursuntilevent-1
 
-		if len(veryimportanttasks) >= 3:
-			x = veryimportanttasks[0].strng+"\n"+veryimportanttasks[1].strng+"\n"+veryimportanttasks[2].strng
-		elif len(veryimportanttasks) > 0:
-			x=""
-			for event in veryimportanttasks:
-				x = x + (event.strng+"\n")
-		else:
-			x=""
-
-		topveryimportant_holder.set(x)
+		
 
 
 
@@ -1206,18 +1249,26 @@ def tasksclear(lst):
 		veryimportanttasks.clear()
 
 		topveryimportant_holder.set("")
+		topveryimportant_holder2.set("")
+		topveryimportant_holder3.set("")
+
+
 
 	elif lst == "important":
 
 		importanttasks.clear()
 
 		topimportant_holder.set("")
+		topimportant_holder2.set("")
+		topimportant_holder3.set("")
 
 	elif lst == "not important":
 
 		notimportanttasks.clear()
 
 		topnotimportant_holder.set("")
+		topnotimportant_holder2.set("")
+		topnotimportant_holder3.set("")
 
 def veryimportantclear():
 
