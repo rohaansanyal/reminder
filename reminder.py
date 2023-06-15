@@ -52,6 +52,9 @@ notimportanttasks = []
 
 noFiveMinCheck = False
 
+
+
+
 #-------------------------------------------------------------------------------------------------------------------------------------------------
 
 banner = tk.Label(window, text=" "*1000, fg="white", bg="grey60")#top orange line withe the time
@@ -561,19 +564,61 @@ def tick():
 
 
 	#~~~~~~~~~~~~~~~~~~~~~~~3 task code~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 	i=0
 	for event in veryimportanttasks:
 		
 		x=event.strng+"\n"
-		if(i==0):
+		if(i == 0):
 			topveryimportant_holder.set(x)
-		elif(i==1):
+		elif(i == 1):
 			topveryimportant_holder2.set(x)
-		elif(i==2):
+		elif(i == 2):
 			topveryimportant_holder3.set(x)
-			i=(-1)
+		elif(i == 3):
+			topveryimportant_holder.set(veryimportanttasks[0].strng+"\n" + x)
+		elif(i == 4):
+			topveryimportant_holder2.set(veryimportanttasks[1].strng+"\n" + x)
+		elif(i == 5):
+			topveryimportant_holder3.set(veryimportanttasks[2].strng+"\n" + x)
 		i+=1
 
+	z=0
+	for event in importanttasks:
+		
+		x=event.strng+"\n"
+		if(z == 0):
+			topimportant_holder.set(x)
+		elif(z == 1):
+			topimportant_holder2.set(x)
+		elif(z == 2):
+			topimportant_holder3.set(x)
+		elif(z == 3):
+			topimportant_holder.set(importanttasks[0].strng+"\n" + x)
+		elif(z == 4):
+			topimportant_holder2.set(importanttasks[1].strng+"\n" + x)
+		elif(z == 5):
+			topimportant_holder3.set(importanttasks[2].strng+"\n" + x)
+		z+=1
+
+	y=0
+	for event in notimportanttasks:
+		
+		x=event.strng+"\n"
+		if(y == 0):
+			topnotimportant_holder.set(x)
+		elif(y == 1):
+			topnotimportant_holder2.set(x)
+		elif(y == 2):
+			topnotimportant_holder3.set(x)
+		elif(y == 3):
+			topnotimportant_holder.set(notimportanttasks[0].strng+"\n" + x)
+		elif(y == 4):
+			topnotimportant_holder2.set(notimportanttasks[1].strng+"\n" + x)
+		elif(y == 5):
+			topnotimportant_holder3.set(notimportanttasks[2].strng+"\n" + x)
+		y+=1
 	#~~~~~~~~~~~~~~~~~~~~~~~ ordering lists ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	templst = selection_sort(veryimportanttasks,len(veryimportanttasks))
@@ -648,20 +693,11 @@ def tick():
 				#print(TimeHour)
 				hoursuntilevent=hoursuntilevent-1
 	
-		if len(importanttasks) >= 3:
-			x = importanttasks[0].strng+"\n"+importanttasks[1].strng+"\n"+importanttasks[2].strng
-		elif len(importanttasks) > 0:
-			x=""
-			for event in importanttasks:
-				x = x + (event.strng+"\n")
-		else:
-			x=""
 
-		topimportant_holder.set(x)
 		
 		
 		
-		
+	
 
 		if TimeDay == event.day and TimeMonth == event.month:
 
@@ -684,18 +720,6 @@ def tick():
 				#print(TimeHour)
 				hoursuntilevent=hoursuntilevent-1
 
-		if len(notimportanttasks) >= 3:
-			x = notimportanttasks[0].strng+"\n"+notimportanttasks[1].strng+"\n"+notimportanttasks[2].strng
-		elif len(notimportanttasks) > 0:
-			x=""
-			for event in notimportanttasks:
-				x = x + (event.strng+"\n")
-		else:
-			x=""
-
-		topnotimportant_holder.set(x)
-
-		
 		
 		
 		
@@ -969,16 +993,6 @@ def AddEvent(event):
 
 		veryimportanttasks.append(event)
 
-		if len(veryimportanttasks) >= 3:
-			x = veryimportanttasks[0].strng+"\n"+veryimportanttasks[1].strng+"\n"+veryimportanttasks[2].strng
-		elif len(veryimportanttasks) > 0:
-			x=""
-			for event in veryimportanttasks:
-				x = x + (event.strng+"\n")
-		else:
-			x=""
-
-		topveryimportant_holder.set(x)
 
 	elif event.importance == "Important":
 
@@ -986,34 +1000,17 @@ def AddEvent(event):
 		importanttasks.append(event)
 
 
-		if len(importanttasks) >= 3:
-			x = importanttasks[0].strng+"\n"+importanttasks[1].strng+"\n"+importanttasks[2].strng
-		elif len(importanttasks) > 0:
-			x=""
-			for event in importanttasks:
-				x = x + (event.strng+"\n")
-		else:
-			x=""
-
-		topimportant_holder.set(x)
-
 	elif event.importance == "Not Important":
 
 		
 		notimportanttasks.append(event)
 
-		if len(notimportanttasks) >= 3:
-			x = notimportanttasks[0].strng+"\n"+notimportanttasks[1].strng+"\n"+notimportanttasks[2].strng
-		elif len(notimportanttasks) > 0:
-			x=""
-			for event in notimportanttasks:
-				x = x + (event.strng+"\n")
-		else:
-			x=""
-
-		topnotimportant_holder.set(x)
-
 	x=""
+
+
+
+
+
 
 categories = ['name', 'desc', 'month', 'day', 'hour', 'minute']
 
@@ -1155,50 +1152,14 @@ def RemoveEvent(event):
 	
 		veryimportanttasks.remove(event)
 
-		if len(veryimportanttasks) >= 3:
-			x = veryimportanttasks[0].strng+"\n"+veryimportanttasks[1].strng+"\n"+veryimportanttasks[2].strng
-		elif len(veryimportanttasks) > 0:
-			x=""
-			for event in veryimportanttasks:
-				x = x + (event.strng+"\n")
-		else:
-			x=""
-
-		topveryimportant_holder.set(x)
-
 	elif event.importance == "Important":
 
 		importanttasks.remove(event)
 
-		if len(importanttasks) >= 3:
-			x = importanttasks[0].strng+"\n"+importanttasks[1].strng+"\n"+importanttasks[2].strng
-		elif len(importanttasks) > 0:
-			x=""
-			for event in importanttasks:
-				x = x + (event.strng+"\n")
-		else:
-			x=""
-
-		topimportant_holder.set(x)
-
-		#importantdf.drop(importantdf.loc[importantdf['name'] == event.title].index)
 
 	elif event.importance == "Not Important":
 
 		notimportanttasks.remove(event)
-
-		if len(notimportanttasks) >= 3:
-			x = notimportanttasks[0].strng+"\n"+notimportanttasks[1].strng+"\n"+notimportanttasks[2].strng
-		elif len(notimportanttasks) > 0:
-			x=""
-			for event in notimportanttasks:
-				x = x + (event.strng+"\n")
-		else:
-			x=""
-
-		topnotimportant_holder.set(x)
-
-		#notimportantdf.drop(notimportantdf.loc[notimportantdf['name'] == event.title].index)
 
 	x=""
 
